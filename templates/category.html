@@ -1,0 +1,53 @@
+<!-- wp:template-part {"slug":"header","theme":"boundless-native-theme","tagName":"header"} /-->
+
+<!-- wp:group {"className":"bl-archive-header"} -->
+<div class="wp-block-group bl-archive-header">
+  <!-- wp:group {"className":"bl-wrap"} -->
+  <div class="wp-block-group bl-wrap">
+    <!-- wp:query-title {"type":"archive","className":"bl-archive-title"} /-->
+    <!-- wp:term-description {"className":"bl-archive-desc"} /-->
+  </div>
+  <!-- /wp:group -->
+</div>
+<!-- /wp:group -->
+
+<!-- Subcategory cards — rendered dynamically via PHP -->
+<!-- wp:boundless/subcategory-list {"heading":"Subcategories"} /-->
+
+<!-- wp:group {"layout":{"type":"constrained","contentSize":"1100px"},"className":"bl-archive-grid-wrap"} -->
+<div class="wp-block-group bl-archive-grid-wrap">
+  <!-- wp:query {"queryId":20,"query":{"perPage":9,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","inherit":true},"className":"bl-posts-query"} -->
+  <div class="wp-block-query bl-posts-query">
+    <!-- wp:post-template {"layout":{"type":"grid","columnCount":3}} -->
+    <!-- wp:group {"className":"bl-post-card"} -->
+    <div class="wp-block-group bl-post-card">
+      <!-- wp:post-featured-image {"isLink":true,"style":{"border":{"radius":"10px"}},"height":"200px"} /-->
+      <!-- wp:post-title {"isLink":true,"level":3,"style":{"typography":{"fontSize":"1.125rem"}}} /-->
+      <!-- wp:post-excerpt {"moreText":"Read more →","excerptLength":18} /-->
+      <!-- wp:group {"className":"bl-post-meta","layout":{"type":"flex","justifyContent":"space-between"}} -->
+      <div class="wp-block-group bl-post-meta">
+        <!-- wp:post-date {"format":"M j, Y","fontSize":"small"} /-->
+        <!-- wp:post-terms {"term":"category","fontSize":"small"} /-->
+      </div>
+      <!-- /wp:group -->
+    </div>
+    <!-- /wp:group -->
+    <!-- /wp:post-template -->
+
+    <!-- wp:query-no-results -->
+    <!-- wp:paragraph {"className":"bl-no-results"} -->
+    <p class="bl-no-results">No posts found in this category.</p>
+    <!-- /wp:paragraph -->
+    <!-- /wp:query-no-results -->
+
+    <!-- wp:query-pagination {"className":"bl-pagination","layout":{"type":"flex","justifyContent":"center"}} -->
+    <!-- wp:query-pagination-previous /-->
+    <!-- wp:query-pagination-numbers /-->
+    <!-- wp:query-pagination-next /-->
+    <!-- /wp:query-pagination -->
+  </div>
+  <!-- /wp:query -->
+</div>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","theme":"boundless-native-theme","tagName":"footer"} /-->

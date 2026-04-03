@@ -1,0 +1,2607 @@
+/* ================================================================
+   BOUNDLESS NATIVE THEME — Complete Stylesheet
+   Matches boundless-original.html design reference exactly.
+   ================================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+	--bl-max: 1100px;
+	--bl-gutter: 32px;
+	--bl-gutter-xs: 16px;
+	--bl-nav-h: 60px;
+	--bl-touch: 44px;
+	--bl-green: #1A5C38;
+	--bl-green-deep: #1A5C38;
+	--bl-green-mid: #2E7D4F;
+	--bl-green-light: #E8F5ED;
+	--bl-green-border: #C8E4D0;
+	--bl-gold: #C45C00;
+	--bl-bg: #FAF8F3;
+	--bl-text: #1C1C1C;
+	--bl-text-secondary: #6B7280;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+	overflow-x: hidden;
+}
+
+body {
+	font-family: "Jost", sans-serif;
+	background: var(--bl-bg);
+	color: #1a1a1a;
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+	overflow-x: hidden;
+}
+
+/* Body scroll lock — applied by JS when mobile nav is open */
+body.bl-nav-open {
+	overflow: hidden;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+}
+
+a { color: inherit; text-decoration: none; }
+img, video, svg { max-width: 100%; height: auto; display: block; }
+button { font-family: "Jost", sans-serif; cursor: pointer; }
+
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* ================================================================
+   WORDPRESS BLOCK LAYOUT OVERRIDES
+   WordPress injects  body .is-layout-flex { display: flex }  (specificity 0-1-1)
+   on wp:columns blocks. Our grid declarations (0-1-0) lose the
+   specificity fight. Using double-class selectors (0-2-0) to win.
+   ================================================================ */
+/* Zero the block gap between major sections — each section has its own padding */
+.wp-site-blocks > * { margin-block: 0; }
+
+.bl-benefits-grid.wp-block-columns,
+.bl-reviews-grid.wp-block-columns,
+.bl-posters-grid.wp-block-columns,
+.bl-safety-grid.wp-block-columns,
+.bl-contact-grid.wp-block-columns { display: grid; }
+
+/* wp:column children get  is-layout-flow  which adds margin-block-start: 1.25em
+   to every child via :where() (0 specificity). Reset inside our custom cards. */
+.bl-benefit-card.wp-block-column { display: grid; }
+.bl-benefit-card > *,
+.bl-review-card > *,
+.bl-poster-card > *,
+.bl-safety-card > * { margin-block: 0; }
+
+/*
+ * ── WordPress Block Theme resets ───────────────────────────────
+ * 1. Remove any gap WordPress injects between top-level site blocks
+ *    (e.g. between the header template-part, page content, footer).
+ * 2. Prevent WordPress's default link colours / underlines from
+ *    bleeding into our custom HTML blocks.
+ * 3. Reset heading margins that WordPress global-styles may add.
+ */
+/* Zero gap between header/content/footer template parts only */
+.wp-site-blocks > .wp-block-template-part + *,
+.wp-site-blocks > * + .wp-block-template-part { margin-block-start: 0 !important; }
+.wp-site-blocks { margin: 0; padding: 0; }
+.wp-block-template-part { display: block; }
+
+/* Heading reset — WordPress global-styles injects margin on h1-h6 */
+h1, h2, h3, h4, h5, h6 { margin: 0; }
+
+/* ================================================================
+   SITE HEADER / NAV
+   ================================================================ */
+
+/*
+ * When a WordPress admin bar is visible it is position:fixed at
+ * the top of the viewport (32 px tall on desktop, 46 px on ≤782 px).
+ * Our sticky header must sit just below it.
+ */
+.admin-bar header.wp-block-template-part,
+.admin-bar .wp-block-template-part[data-slug="header"] {
+	top: 32px !important;
+}
+@media screen and (max-width: 782px) {
+	.admin-bar header.wp-block-template-part,
+	.admin-bar .wp-block-template-part[data-slug="header"] {
+		top: 46px !important;
+	}
+	.admin-bar #site-nav .bl-main-nav {
+		top: calc(var(--bl-nav-h) + 46px) !important;
+	}
+}
+
+/*
+ * WordPress block themes wrap template parts in a container element
+ * (e.g. <header class="wp-block-template-part">). Sticky positioning
+ * must be applied to THAT outer wrapper, not just the inner #site-nav,
+ * so the nav sticks to the viewport even through the template-part layer.
+ */
+header.wp-block-template-part,
+.wp-block-template-part[data-slug="header"] {
+	position: sticky !important;
+	top: 0 !important;
+	z-index: 100 !important;
+	overflow: visible !important;
+}
+
+#site-nav {
+	background: rgba(250,248,243,0.92);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	padding: 0 max(var(--bl-gutter), env(safe-area-inset-right, 0px)) 0 max(var(--bl-gutter), env(safe-area-inset-left, 0px));
+	box-shadow: none;
+	border-bottom: 1px solid rgba(46,125,79,0.12);
+	overflow: visible;
+}
+
+.nav-inner {
+	max-width: var(--bl-max);
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	min-height: var(--bl-nav-h);
+	gap: clamp(8px, 2vw, 16px);
+	overflow: visible;
+}
+
+.nav-logo {
+	display: flex;
+	align-items: center;
+	flex-shrink: 0;
+}
+.nav-logo-img {
+	height: clamp(28px, 4vw, 40px);
+	width: auto;
+	display: block;
+}
+.nav-logo:focus-visible { outline: 2px solid var(--bl-gold); outline-offset: 3px; border-radius: 4px; }
+
+
+/* ================================================================
+   CUSTOM MAIN NAV  (#site-nav .bl-*)
+   Pure HTML navigation — zero WordPress block / database dependency.
+   All selectors are prefixed with #site-nav (ID specificity = 1-n-0)
+   so they win over any WordPress global-styles-inline-css rules.
+   Critical layout and visibility rules carry !important to survive
+   browser CSS-cache staleness during theme updates.
+   ================================================================ */
+
+/* ── Container — desktop horizontal nav ── */
+#site-nav .bl-main-nav {
+	flex: 1 !important;
+	min-width: 0 !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	overflow: visible; /* no !important — lets mobile override win cleanly */
+}
+
+/* ── Top-level list: always a horizontal flex row ── */
+#site-nav .bl-nav-list {
+	display: flex !important;
+	flex-direction: row !important;
+	flex-wrap: nowrap !important;
+	align-items: center !important;
+	list-style: none !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	gap: 0 !important;
+}
+
+/* ── Every list item: no bullet, anchor for dropdown ── */
+#site-nav .bl-nav-list > li,
+#site-nav .bl-nav-item {
+	position: relative !important;
+	list-style: none !important;
+	display: block !important;
+}
+
+/* ── Top-level link / button ── */
+#site-nav .bl-nav-link {
+	display: inline-flex !important;
+	align-items: center !important;
+	gap: 4px !important;
+	padding: 0 clamp(6px, 0.8vw, 14px) !important;
+	height: var(--bl-nav-h) !important;
+	color: var(--bl-text-secondary) !important;
+	font-family: "Jost", sans-serif !important;
+	font-size: 11px !important;
+	font-weight: 600 !important;
+	letter-spacing: 0.04em !important;
+	text-transform: uppercase !important;
+	text-decoration: none !important;
+	white-space: nowrap !important;
+	background: none !important;
+	border: none !important;
+	cursor: pointer !important;
+	transition: color 0.18s ease !important;
+}
+#site-nav .bl-nav-link:hover,
+#site-nav .bl-nav-item:hover > .bl-nav-link,
+#site-nav .bl-nav-item:focus-within > .bl-nav-link {
+	color: var(--bl-green) !important;
+}
+#site-nav .bl-nav-link:focus-visible {
+	outline: 2px solid var(--bl-gold) !important;
+	outline-offset: -3px !important;
+	border-radius: 4px !important;
+}
+
+/* ── Caret icon ── */
+#site-nav .bl-nav-caret {
+	flex-shrink: 0;
+	transition: transform 0.2s ease;
+}
+#site-nav .bl-has-sub:hover > .bl-nav-link .bl-nav-caret,
+#site-nav .bl-has-sub:focus-within > .bl-nav-link .bl-nav-caret {
+	transform: rotate(180deg);
+}
+
+/* ================================================================
+   DROPDOWN SUB-MENU
+   HIDDEN BY DEFAULT — always opacity:0 visibility:hidden.
+   Visible ONLY on :hover / :focus-within of the parent <li>.
+   ================================================================ */
+#site-nav .bl-nav-sub {
+	/* Pull out of normal flow so it floats over the page */
+	position: absolute !important;
+	top: 100% !important;
+	left: 50% !important;
+	transform: translateX(-50%) translateY(-10px) !important;
+	z-index: 9999 !important;
+
+	/* Size */
+	min-width: 240px !important;
+	width: max-content !important;
+
+	/* Appearance */
+	background: #fff !important;
+	border: 1px solid var(--bl-green-border) !important;
+	border-top: 2px solid var(--bl-gold) !important;
+	border-radius: 0 0 14px 14px !important;
+	padding: 8px 0 10px !important;
+	box-shadow: 0 16px 48px rgba(0,0,0,0.08) !important;
+
+	/* List reset */
+	list-style: none !important;
+	margin: 0 !important;
+
+	/* ═══ HIDDEN STATE — THE most important rules in this file ═══
+	   opacity:0  → invisible
+	   visibility:hidden → prevents hover events leaking through
+	   pointer-events:none → cursor passes through to page below   */
+	opacity: 0 !important;
+	visibility: hidden !important;
+	pointer-events: none !important;
+
+	transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease !important;
+}
+
+/* Sub-menu list items: no bullets */
+#site-nav .bl-nav-sub > li {
+	list-style: none !important;
+	display: block !important;
+}
+
+/*
+ * Hover bridge — invisible strip that fills the gap between
+ * the button bottom edge and the dropdown top edge.
+ * The cursor crosses it without firing mouseleave on the <li>,
+ * so the dropdown stays open while the pointer moves into it.
+ */
+#site-nav .bl-has-sub::after {
+	content: "" !important;
+	position: absolute !important;
+	bottom: 0 !important;
+	left: -20px !important;
+	right: -20px !important;
+	height: 12px !important;
+	display: block !important;
+	z-index: 9998 !important;
+}
+
+/* ═══ OPEN STATE — CSS :hover and :focus-within (no JS required) ═══ */
+#site-nav .bl-has-sub:hover > .bl-nav-sub,
+#site-nav .bl-has-sub:focus-within > .bl-nav-sub {
+	opacity: 1 !important;
+	visibility: visible !important;
+	pointer-events: auto !important;
+	transform: translateX(-50%) translateY(0) !important;
+}
+
+/* ── Sub-menu link rows ── */
+#site-nav .bl-sub-link {
+	display: flex !important;
+	flex-direction: column !important;
+	padding: 11px 22px !important;
+	color: var(--bl-text) !important;
+	font-family: "Jost", sans-serif !important;
+	font-size: 13px !important;
+	font-weight: 500 !important;
+	letter-spacing: 0.02em !important;
+	text-decoration: none !important;
+	line-height: 1.25 !important;
+	transition: background 0.14s ease, color 0.14s ease !important;
+}
+#site-nav .bl-sub-link:hover {
+	background: var(--bl-green-light) !important;
+	color: var(--bl-green) !important;
+}
+#site-nav .bl-sub-link span {
+	font-size: 11px !important;
+	font-weight: 400 !important;
+	color: var(--bl-text-secondary) !important;
+	margin-top: 2px !important;
+	letter-spacing: 0 !important;
+}
+
+/* ── Mobile hamburger toggle ── */
+#site-nav .bl-nav-toggle {
+	display: none; /* hidden on desktop — JS/media-query shows it */
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	background: none;
+	border: 1px solid var(--bl-green-border);
+	cursor: pointer;
+	border-radius: 8px;
+	flex-shrink: 0;
+	padding: 0;
+	gap: 5px;
+	transition: background 0.15s;
+}
+#site-nav .bl-nav-toggle:hover { background: var(--bl-green-light); }
+#site-nav .bl-nav-toggle:focus-visible { outline: 2px solid var(--bl-gold); outline-offset: 2px; }
+
+/* Three-bar hamburger ☰ icon */
+#site-nav .bl-bar {
+	display: block;
+	width: 20px;
+	height: 2px;
+	background: var(--bl-green);
+	border-radius: 1px;
+	transition: transform 0.25s ease, opacity 0.2s ease;
+}
+
+/* Animate to × when open */
+#site-nav .bl-nav-toggle[aria-expanded="true"] .bl-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+#site-nav .bl-nav-toggle[aria-expanded="true"] .bl-bar:nth-child(2) { opacity: 0; }
+#site-nav .bl-nav-toggle[aria-expanded="true"] .bl-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── Tight nav at 901-1100px — prevent overflow with 8 menu items ── */
+@media (max-width: 1100px) and (min-width: 901px) {
+	#site-nav .bl-nav-link {
+		padding: 0 5px !important;
+		font-size: 10px !important;
+	}
+}
+
+/* ── Mobile breakpoint ≤ 900 px ─────────────────────────────── */
+@media (max-width: 900px) {
+
+	/* 1. Show hamburger ☰ button */
+	#site-nav .bl-nav-toggle {
+		display: flex !important;
+	}
+
+	/* 2. Nav panel: always position:fixed, slid off-screen via transform.
+	      NO display:none — avoids CSS specificity issues entirely. */
+	#site-nav .bl-main-nav {
+		position: fixed !important;
+		top: var(--bl-nav-h) !important;
+		left: 0 !important;
+		right: 0 !important;
+		bottom: 0 !important;
+		background: #fff !important;
+		flex-direction: column !important;
+		align-items: stretch !important;
+		justify-content: flex-start !important;
+		padding: 0 !important;
+		z-index: 9998 !important;
+		transform: translateX(-100%) !important;
+		overflow: hidden !important;
+		transition: transform 0.3s ease !important;
+	}
+	.admin-bar #site-nav .bl-main-nav {
+		top: calc(var(--bl-nav-h) + 46px) !important;
+	}
+
+	/* 3. SHOW: JS adds .is-open → slide in from left */
+	#site-nav .bl-main-nav.is-open {
+		transform: translateX(0) !important;
+		overflow-y: auto !important;
+		-webkit-overflow-scrolling: touch !important;
+	}
+
+	/* 4-7: Rules for nav items while still inside #site-nav */
+	#site-nav .bl-nav-list { flex-direction: column !important; align-items: stretch !important; }
+	#site-nav .bl-nav-item { border-bottom: 1px solid var(--bl-green-border) !important; }
+	#site-nav .bl-nav-link { height: auto !important; padding: 18px 24px !important; font-size: 14px !important; justify-content: space-between !important; color: var(--bl-text) !important; white-space: normal !important; }
+	#site-nav .bl-nav-sub { position: static !important; transform: none !important; opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; border: none !important; border-radius: 0 !important; box-shadow: none !important; background: var(--bl-green-light) !important; padding: 0 !important; min-width: 0 !important; width: 100% !important; max-height: 0 !important; overflow: hidden !important; transition: max-height 0.3s ease !important; }
+	#site-nav .bl-has-sub.is-open > .bl-nav-sub { max-height: 500px !important; }
+	#site-nav .bl-has-sub.is-open > .bl-nav-link .bl-nav-caret { transform: rotate(180deg) !important; }
+	#site-nav .bl-has-sub::after { display: none !important; }
+	#site-nav .bl-sub-link { padding: 14px 36px !important; color: var(--bl-text) !important; }
+	#site-nav .bl-sub-link:hover { background: rgba(26,92,56,0.08) !important; }
+	#site-nav .bl-sub-link span { display: none !important; }
+}
+
+/* ================================================================
+   MOBILE NAV PANEL — when JS moves <nav> to <body> it loses
+   the #site-nav ancestor. These rules target .bl-main-nav.is-open
+   directly so styles apply regardless of DOM position.
+   ================================================================ */
+.bl-main-nav.is-open .bl-nav-list {
+	display: flex; flex-direction: column; align-items: stretch;
+	list-style: none; margin: 0; padding: 0; gap: 0;
+}
+.bl-main-nav.is-open .bl-nav-item {
+	position: relative; list-style: none;
+	border-bottom: 1px solid #C8E4D0;
+}
+.bl-main-nav.is-open .bl-nav-link {
+	display: flex; align-items: center; justify-content: space-between;
+	padding: 18px 24px; height: auto;
+	font-family: "Jost", sans-serif; font-size: 14px; font-weight: 600;
+	color: #1C1C1C; text-transform: uppercase; letter-spacing: 0.04em;
+	text-decoration: none; background: none; border: none; cursor: pointer;
+	width: 100%; white-space: normal;
+}
+.bl-main-nav.is-open .bl-nav-link:hover { color: #1A5C38; }
+.bl-main-nav.is-open .bl-nav-caret {
+	flex-shrink: 0; transition: transform 0.2s ease; width: 10px; height: 6px;
+}
+.bl-main-nav.is-open .bl-nav-sub {
+	position: static; list-style: none; margin: 0; padding: 0;
+	background: #E8F5ED; border: none; border-radius: 0; box-shadow: none;
+	width: 100%; max-height: 0; overflow: hidden;
+	transition: max-height 0.3s ease;
+	opacity: 1; visibility: visible; pointer-events: auto;
+	transform: none; min-width: 0;
+}
+.bl-main-nav.is-open .bl-has-sub.is-open > .bl-nav-sub {
+	max-height: 500px;
+}
+.bl-main-nav.is-open .bl-has-sub.is-open > .bl-nav-link .bl-nav-caret {
+	transform: rotate(180deg);
+}
+.bl-main-nav.is-open .bl-has-sub::after { display: none; }
+.bl-main-nav.is-open .bl-sub-link {
+	display: block; padding: 14px 36px;
+	font-family: "Jost", sans-serif; font-size: 13px; font-weight: 500;
+	color: #1C1C1C; text-decoration: none;
+}
+.bl-main-nav.is-open .bl-sub-link:hover { background: rgba(26,92,56,0.08); }
+.bl-main-nav.is-open .bl-sub-link span { display: none; }
+
+.cart-btn {
+	background: var(--bl-green); color: #fff; border-radius: 8px;
+	padding: 0 16px; min-height: 36px; display: inline-flex; align-items: center;
+	font-weight: 700; font-size: 11px; letter-spacing: 0.05em;
+	flex-shrink: 0; white-space: nowrap; border: none; cursor: pointer;
+}
+.cart-btn:hover { background: var(--bl-green-mid); }
+.cart-btn:focus-visible { outline: 2px solid var(--bl-green); outline-offset: 2px; }
+
+/* ================================================================
+   HERO
+   ================================================================ */
+.bl-hero {
+	padding: clamp(40px, 8vw, 60px) 0 0;
+	color: var(--bl-text);
+	background: linear-gradient(135deg, #FAF8F3 0%, #F4FAF6 45%, #E8F5ED 100%);
+}
+.bl-wrap {
+	max-width: var(--bl-max);
+	margin: 0 auto;
+	padding: 0 max(var(--bl-gutter), env(safe-area-inset-left, 0px));
+}
+.bl-breadcrumb {
+	font-size: 10px; color: var(--bl-text-secondary);
+	margin-bottom: clamp(16px, 3vw, 22px);
+	letter-spacing: 0.14em; text-transform: uppercase;
+}
+.bl-hero-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: clamp(28px, 6vw, 64px);
+	align-items: end;
+}
+.bl-hero-badge {
+	display: inline-flex; align-items: center; gap: 9px;
+	background: var(--bl-green-light); border: 1px solid rgba(46,125,79,0.2);
+	border-radius: 100px; padding: 5px 18px;
+	margin-bottom: clamp(16px, 3vw, 22px);
+}
+.bl-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--bl-green-mid); }
+.bl-hero-badge span { font-size: 9px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--bl-green); }
+.bl-hero-brand { font-size: 11px; font-weight: 700; color: var(--bl-text-secondary); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 8px; }
+.bl-hero-title {
+	font-size: clamp(2.25rem, 5vw + 0.5rem, 3rem);
+	font-weight: 700; line-height: 1.02; margin-bottom: 10px;
+	font-family: "Cormorant Garamond", serif; font-style: italic;
+	color: var(--bl-green);
+}
+.bl-hero-subtitle { font-size: 12px; color: var(--bl-text-secondary); margin-bottom: clamp(16px, 3vw, 22px); letter-spacing: 0.08em; text-transform: uppercase; }
+.bl-hero-tagline { font-size: clamp(15px, 2.2vw, 17px); font-weight: 300; line-height: 1.6; color: var(--bl-text-secondary); margin-bottom: clamp(20px, 3vw, 26px); }
+.bl-stars-row { display: flex; align-items: center; gap: 10px; margin-bottom: clamp(16px, 3vw, 22px); flex-wrap: wrap; }
+.bl-stars { color: var(--bl-gold); font-size: 15px; letter-spacing: 2px; }
+.bl-review-count { font-size: 12px; color: var(--bl-text-secondary); }
+.bl-hero-desc { font-size: clamp(13px, 1.5vw, 14px); line-height: 1.75; color: #555; margin-bottom: clamp(24px, 4vw, 34px); max-width: 450px; }
+
+/* Purchase row: price + qty + add to cart */
+.bl-purchase-row {
+	display: flex; align-items: center; gap: clamp(12px, 2vw, 18px); flex-wrap: wrap;
+	margin-bottom: 4px;
+}
+.bl-price-block { display: flex; align-items: baseline; gap: 6px; }
+.bl-price { font-size: clamp(1.875rem, 4vw, 2.25rem); font-weight: 800; font-family: "Cormorant Garamond", serif; color: var(--bl-green); }
+.bl-price-size { font-size: 12px; color: var(--bl-text-secondary); }
+.bl-buy-controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+/* Qty +/- control */
+.bl-qty-control {
+	display: flex; align-items: center;
+	border: 1px solid var(--bl-green-border); border-radius: 9px;
+	overflow: hidden;
+}
+.bl-qty-btn {
+	background: none; border: none; color: var(--bl-green);
+	width: 36px; height: 36px; font-size: 18px; line-height: 1;
+	display: flex; align-items: center; justify-content: center;
+	cursor: pointer; transition: background 0.15s;
+}
+.bl-qty-btn:hover { background: var(--bl-green-light); }
+.bl-qty-val { width: 28px; text-align: center; font-size: 14px; font-weight: 700; color: var(--bl-text); }
+
+/* Add to cart button */
+.bl-add-btn {
+	border: none; border-radius: 10px; padding: 11px 30px;
+	display: inline-flex; align-items: center; justify-content: center;
+	font-family: "Jost", sans-serif; font-weight: 700; font-size: 13px;
+	background: var(--bl-green); color: #fff; letter-spacing: 0.05em; text-transform: uppercase;
+	transition: all 0.25s; cursor: pointer;
+	box-shadow: 0 4px 20px rgba(26,92,56,0.25);
+}
+.bl-add-btn:hover { background: var(--bl-green-mid); }
+.bl-add-btn.added { background: var(--bl-green-mid); color: #fff; }
+.bl-add-btn:focus-visible { outline: 2px solid var(--bl-gold); outline-offset: 2px; }
+
+.bl-trust-row { display: flex; gap: clamp(10px, 2vw, 18px); margin-top: 20px; flex-wrap: wrap; }
+.bl-trust-row span { font-size: 11px; color: var(--bl-green); display: flex; align-items: center; gap: 5px; }
+
+/* Bottle visual */
+.bl-bottle-wrap { display: flex; justify-content: center; align-items: flex-end; }
+.bl-bottle-outer { position: relative; }
+.bl-bottle {
+	width: min(200px, 100%); min-height: 330px;
+	background: linear-gradient(145deg, #E8F5ED, #FFFFFF); backdrop-filter: blur(20px);
+	border: 1px solid rgba(26,92,56,0.15); border-radius: 14px 14px 24px 24px;
+	display: flex; flex-direction: column; align-items: center; justify-content: center;
+	padding: 24px; position: relative;
+	box-shadow: 0 48px 90px rgba(0,0,0,0.40);
+}
+.bl-spray-head {
+	position: absolute; top: -44px; left: 50%; transform: translateX(-50%);
+	width: 14px; height: 44px; background: rgba(26,92,56,0.12);
+	border-radius: 4px 4px 0 0; border: 1px solid rgba(26,92,56,0.2);
+}
+.bl-spray-nozzle {
+	position: absolute; top: -38px; left: 50%; width: 52px; height: 10px;
+	background: rgba(26,92,56,0.12); border-radius: 5px;
+	border: 1px solid rgba(26,92,56,0.2);
+	transform-origin: left center; transform: translateX(-10%) rotate(-20deg);
+}
+.bl-spray-trigger {
+	position: absolute; top: -6px; left: 50%; transform: translateX(-50%);
+	width: 30px; height: 22px; background: rgba(26,92,56,0.08);
+	border-radius: 0 0 8px 8px; border: 1px solid rgba(26,92,56,0.2);
+}
+.bl-bottle-brand { font-size: 9px; font-weight: 700; letter-spacing: 0.22em; color: var(--bl-text-secondary); text-transform: uppercase; margin-bottom: 12px; }
+.bl-bottle-name { font-size: 22px; font-weight: 700; text-align: center; line-height: 1.1; margin-bottom: 6px; font-family: "Cormorant Garamond", serif; font-style: italic; color: var(--bl-green); }
+.bl-bottle-line { width: 32px; height: 2px; border-radius: 2px; background: var(--bl-gold); margin: 8px auto; opacity: 0.8; }
+.bl-bottle-type { font-size: 10px; font-weight: 600; text-align: center; color: var(--bl-text-secondary); text-transform: uppercase; letter-spacing: 0.12em; }
+.bl-bottle-ings { margin-top: 20px; display: flex; flex-direction: column; gap: 6px; width: 100%; }
+.bl-bottle-ing {
+	background: rgba(26,92,56,0.06); border-radius: 5px; padding: 4px 10px;
+	font-size: 9px; font-weight: 600; letter-spacing: 0.04em; color: var(--bl-text);
+	display: flex; justify-content: space-between;
+}
+.bl-bottle-ing span:last-child { color: var(--bl-text-secondary); }
+.bl-bottle-size { margin-top: 16px; font-size: 9px; color: var(--bl-text-secondary); letter-spacing: 0.1em; }
+.bl-bottle-badge {
+	position: absolute; top: 20px; right: -22px;
+	background: var(--bl-gold); color: #fff;
+	border-radius: 10px; padding: 7px 13px; font-size: 9px; font-weight: 800;
+	letter-spacing: 0.1em; text-transform: uppercase; box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+/* ================================================================
+   STATS BAR
+   ================================================================ */
+.bl-stats-bar { background: var(--bl-green-light); padding: clamp(16px, 3vw, 20px) 0; border-top: 1px solid rgba(46,125,79,0.12); border-bottom: 1px solid rgba(46,125,79,0.12); }
+.bl-stats-inner { display: flex; justify-content: space-around; flex-wrap: wrap; gap: clamp(10px, 2vw, 12px); }
+.bl-stat { text-align: center; padding: 4px 8px; }
+.bl-stat-val { font-size: clamp(1rem, 2.5vw, 1.25rem); font-weight: 800; font-family: "Cormorant Garamond", serif; color: var(--bl-green); }
+.bl-stat-label { font-size: 9px; color: var(--bl-text-secondary); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 3px; }
+
+/* ================================================================
+   SECTIONS COMMON
+   ================================================================ */
+.bl-section {
+	max-width: var(--bl-max);
+	margin: 0 auto;
+	padding: clamp(48px, 8vw, 72px) max(var(--bl-gutter), env(safe-area-inset-left, 0px)) 0;
+}
+.bl-section-header { margin-bottom: clamp(24px, 4vw, 44px); }
+.bl-center { text-align: center; }
+.bl-eyebrow { font-size: 9px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 12px; color: var(--bl-green-mid); }
+.bl-section-title {
+	font-size: clamp(1.75rem, 4vw + 0.25rem, 2.25rem);
+	font-weight: 700; font-family: "Cormorant Garamond", serif;
+	font-style: italic; line-height: 1.1;
+}
+
+/* ================================================================
+   BENEFITS
+   ================================================================ */
+.bl-benefits-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.bl-benefit-card {
+	background: #fff; border-radius: 16px; padding: clamp(20px, 4vw, 30px) clamp(18px, 3vw, 26px);
+	display: grid; grid-template-columns: 46px 1fr; column-gap: 20px; row-gap: 6px;
+	align-items: start; border: 1px solid var(--bl-green-border);
+}
+.bl-benefit-icon {
+	grid-row: span 2;
+	width: 46px; height: 46px; border-radius: 12px;
+	display: flex; align-items: center; justify-content: center;
+	font-size: 20px; background: var(--bl-green-light); color: var(--bl-green-mid);
+}
+.bl-benefit-title { font-size: clamp(1rem, 2vw, 1.125rem); font-weight: 700; margin-bottom: 0; font-family: "Cormorant Garamond", serif; color: var(--bl-green); }
+.bl-benefit-desc { font-size: 13px; line-height: 1.65; color: #555; }
+
+/* ================================================================
+   TABS
+   ================================================================ */
+.bl-tab-bar {
+	display: flex; margin-bottom: clamp(28px, 5vw, 38px); gap: 2px;
+	border-bottom: 2px solid var(--bl-green-border);
+	overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+}
+.bl-tab-bar::-webkit-scrollbar { display: none; }
+.bl-tab-btn {
+	background: none; border: none; border-bottom: 3px solid transparent;
+	padding: 10px clamp(14px, 2.5vw, 24px); min-height: var(--bl-touch);
+	font-family: "Jost", sans-serif; font-size: 12px; font-weight: 700;
+	color: #aaa; text-transform: uppercase; letter-spacing: 0.08em;
+	transition: all 0.2s; margin-bottom: -2px; cursor: pointer; white-space: nowrap; flex-shrink: 0;
+}
+.bl-tab-btn.active, .bl-tab-btn[aria-selected="true"] { color: var(--bl-green-mid); border-bottom-color: var(--bl-green-mid); }
+.bl-tab-btn:focus-visible { outline: 2px solid var(--bl-green-mid); outline-offset: 2px; border-radius: 4px; }
+.bl-tab-panel { display: none; }
+.bl-tab-panel.active, .bl-tab-panel:not([hidden]) { display: block; }
+
+/* ================================================================
+   INGREDIENTS GRID
+   ================================================================ */
+.bl-ing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+.bl-ing-card {
+	border-radius: 14px; padding: clamp(18px, 3vw, 24px) clamp(16px, 2.5vw, 20px);
+	position: relative; overflow: hidden;
+	background: #fff; border: 1px solid var(--bl-green-border);
+}
+.bl-ing-hero { background: var(--bl-green) !important; border: none !important; }
+.bl-ing-hero-tag {
+	position: absolute; top: 11px; right: 13px;
+	font-size: 8px; font-weight: 800; border-radius: 5px; padding: 3px 7px;
+	letter-spacing: 0.12em; background: #2E7D4F; color: #fff;
+}
+.bl-ing-icon { font-size: 24px; margin-bottom: 10px; color: var(--bl-green-mid); }
+.bl-ing-hero .bl-ing-icon { color: rgba(255,255,255,0.7); }
+.bl-ing-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; gap: 8px; }
+.bl-ing-name { font-size: 16px; font-weight: 700; font-family: "Cormorant Garamond", serif; color: var(--bl-green); }
+.bl-ing-name-hero { color: #fff; }
+.bl-ing-pct { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 5px; background: var(--bl-green-light); color: var(--bl-green-mid); white-space: nowrap; flex-shrink: 0; }
+.bl-ing-pct-hero { background: rgba(255,255,255,0.12); color: #6DBE8A; }
+.bl-ing-desc { font-size: 12px; line-height: 1.58; color: #666; }
+.bl-ing-desc-hero { color: rgba(255,255,255,0.72); }
+.bl-inci-box { margin-top: 28px; padding: 20px 24px; background: #fff; border-radius: 14px; border: 1px solid var(--bl-green-border); }
+.bl-inci-label { font-size: 9px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bl-green-mid); margin-bottom: 10px; }
+.bl-inci-text { font-size: 11.5px; line-height: 1.85; color: #666; font-style: italic; }
+
+/* ================================================================
+   HOW TO USE — 4-STEP GRID
+   ================================================================ */
+.bl-steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 28px; }
+.bl-step-wrap { position: relative; }
+.bl-step-connector {
+	position: absolute; top: 22px; left: 62%; right: -38%;
+	height: 2px; z-index: 0;
+	background: linear-gradient(to right, var(--bl-green-mid), var(--bl-green-border));
+}
+.bl-step-card {
+	background: #fff; border-radius: 16px; padding: clamp(20px, 3vw, 26px) clamp(16px, 2.5vw, 18px);
+	text-align: center; position: relative; z-index: 1;
+	border: 1px solid var(--bl-green-border);
+}
+.bl-step-num {
+	width: 44px; height: 44px; border-radius: 50%; margin: 0 auto 16px;
+	display: flex; align-items: center; justify-content: center;
+	font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+	color: #fff; background: linear-gradient(135deg, var(--bl-green), #2E7D4F);
+	box-shadow: 0 4px 12px rgba(15,61,36,0.3);
+}
+.bl-step-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; font-family: "Cormorant Garamond", serif; color: #1a1a1a; }
+.bl-step-desc { font-size: 12px; color: #666; line-height: 1.55; }
+.bl-pro-tip {
+	border-radius: 14px; padding: clamp(16px, 3vw, 20px) clamp(18px, 3vw, 26px);
+	display: flex; gap: 16px; align-items: flex-start;
+	background: var(--bl-green-light); border: 1px solid var(--bl-green-border);
+}
+.bl-pro-tip-icon { font-size: 22px; color: var(--bl-green-mid); flex-shrink: 0; margin-top: 2px; }
+.bl-pro-tip p { font-size: 13px; line-height: 1.6; color: var(--bl-green); }
+
+/* ================================================================
+   FOR WHICH DOGS
+   ================================================================ */
+.bl-dogs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+.bl-dogs-title { font-size: 22px; font-weight: 700; font-family: "Cormorant Garamond", serif; font-style: italic; margin-bottom: 18px; color: var(--bl-green); }
+.bl-dogs-list { display: flex; flex-direction: column; gap: 9px; }
+.bl-dog-item {
+	display: flex; align-items: center; gap: 12px; padding: 12px 16px;
+	background: #fff; border-radius: 10px; border: 1px solid var(--bl-green-border);
+	font-size: 14px; font-weight: 500; color: var(--bl-green);
+}
+.bl-dog-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; background: var(--bl-green-mid); }
+.bl-dog-cta-box { border-radius: 18px; padding: clamp(24px, 4vw, 34px) clamp(20px, 3vw, 30px); color: #fff; background: var(--bl-green); }
+.bl-dog-cta-title { font-size: 20px; font-weight: 700; font-family: "Cormorant Garamond", serif; font-style: italic; margin-bottom: 14px; }
+.bl-dog-cta-desc { font-size: 13px; line-height: 1.75; opacity: 0.83; margin-bottom: 22px; }
+.bl-dog-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.bl-dog-tag { background: rgba(255,255,255,0.16); border-radius: 100px; padding: 5px 14px; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; }
+
+/* ================================================================
+   PRODUCT HIGHLIGHTS BLOCK
+   ================================================================ */
+.boundless-product-highlights {
+	padding: clamp(20px, 4vw, 28px) max(var(--bl-gutter), env(safe-area-inset-left, 0px));
+	background: #fff; border-top: 1px solid var(--bl-green-border); border-bottom: 1px solid var(--bl-green-border);
+}
+.boundless-section-inner { max-width: var(--bl-max); margin: 0 auto; }
+.boundless-highlight-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.boundless-highlight-pill { background: var(--bl-green-light); border: 1px solid var(--bl-green-border); border-radius: 100px; padding: 6px 14px; font-size: 11px; font-weight: 600; color: var(--bl-green); }
+
+/* ================================================================
+   REVIEWS
+   ================================================================ */
+.bl-reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.bl-review-card { background: #fff; border-radius: 16px; padding: clamp(20px, 3vw, 26px) clamp(18px, 2.5vw, 22px); border: 1px solid var(--bl-green-border); }
+.bl-review-stars { color: var(--bl-gold); font-size: 14px; letter-spacing: 2px; }
+.bl-review-text { font-size: 13px; line-height: 1.75; color: #444; margin: 14px 0 18px; font-style: italic; }
+.bl-review-footer { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.bl-review-name { font-weight: 700; font-size: 13px; color: var(--bl-green); }
+.bl-review-breed { font-size: 10px; font-weight: 700; border-radius: 100px; padding: 3px 10px; letter-spacing: 0.04em; color: var(--bl-green-mid); background: var(--bl-green-light); }
+
+/* ================================================================
+   POSTS / BLOG QUERY
+   ================================================================ */
+.bl-posts-query {
+	max-width: var(--bl-max); margin: 0 auto; padding: 0 max(var(--bl-gutter), env(safe-area-inset-left, 0px));
+}
+/*
+ * theme.json sets blockGap:"0px" globally to prevent unwanted gaps between
+ * the header / content / footer template parts. However, WordPress's
+ * post-template grid uses gap:var(--wp--style--block-gap). We restore a
+ * sensible gap here so the cards are not packed together.
+ */
+.bl-posts-query .wp-block-post-template { gap: 24px !important; }
+.bl-post-card { background: #fff; border-radius: 16px; padding: 28px 24px; border: 1px solid var(--bl-green-border); height: 100%; }
+.bl-post-card .wp-block-post-title { font-family: "Cormorant Garamond", serif; font-size: clamp(1.125rem, 2vw, 1.375rem); margin-bottom: 8px; line-height: 1.2; color: var(--bl-green); }
+.bl-post-card .wp-block-post-title a:hover { color: var(--bl-green-mid); }
+.bl-post-card .wp-block-post-excerpt { font-size: 13px; line-height: 1.65; color: #555; }
+.bl-post-card .wp-block-post-excerpt__more-link { color: var(--bl-green-mid); font-weight: 600; font-size: 12px; }
+
+/* ================================================================
+   CTA SECTION
+   ================================================================ */
+.bl-cta-section {
+	margin: clamp(48px, 8vw, 72px) 0 0;
+	padding: clamp(48px, 8vw, 72px) max(var(--bl-gutter), env(safe-area-inset-left, 0px));
+	text-align: center; color: #fff;
+	background: linear-gradient(135deg, #1A5C38 0%, #2E7D4F 50%, #3D9962 100%);
+}
+.bl-cta-title {
+	font-size: clamp(1.875rem, 4vw + 0.25rem, 2.625rem);
+	font-weight: 700; font-family: "Cormorant Garamond", serif; font-style: italic;
+	margin-bottom: 16px; line-height: 1.1;
+}
+.bl-cta-sub { font-size: clamp(13px, 1.8vw, 15px); opacity: 0.82; margin-bottom: 36px; max-width: 440px; margin-left: auto; margin-right: auto; font-weight: 300; }
+.bl-cta-purchase { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; align-items: center; margin-bottom: 20px; }
+.bl-cta-price { font-size: clamp(1.875rem, 4vw, 2.25rem); font-weight: 800; font-family: "Cormorant Garamond", serif; }
+.bl-cta-btn {
+	border: none; border-radius: 12px; padding: 14px 38px; min-height: var(--bl-touch);
+	display: inline-flex; align-items: center; justify-content: center;
+	font-weight: 700; font-size: 14px; background: #fff; color: var(--bl-green);
+	letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: all 0.3s;
+}
+.bl-cta-btn:hover { background: var(--bl-green-light); }
+.bl-cta-btn:focus-visible { outline: 2px solid var(--bl-gold); outline-offset: 2px; }
+.bl-cta-note { font-size: 11px; opacity: 0.50; }
+
+/* ================================================================
+   AFFILIATE CHECKOUT BLOCK
+   ================================================================ */
+.boundless-affiliate-checkout {
+	padding: clamp(28px, 5vw, 36px) max(var(--bl-gutter), env(safe-area-inset-left, 0px));
+	background: #fff;
+}
+.boundless-affiliate-buttons { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 14px; }
+.boundless-affiliate-buttons a {
+	background: var(--bl-green); color: #fff; border-radius: 10px;
+	padding: 0 20px; min-height: var(--bl-touch);
+	display: inline-flex; align-items: center; justify-content: center;
+	font-size: 12px; font-weight: 700; letter-spacing: 0.04em;
+	transition: background 0.2s;
+}
+.boundless-affiliate-buttons a:hover { background: var(--bl-green-mid); }
+.boundless-affiliate-buttons a.bl-affiliate-amazon { background: #FF9900; color: #111; }
+.boundless-affiliate-buttons a.bl-affiliate-amazon:hover { background: #e68a00; }
+.boundless-affiliate-buttons a:focus-visible { outline: 2px solid var(--bl-gold); outline-offset: 2px; }
+
+/* ================================================================
+   FOOTER
+   ================================================================ */
+footer {
+	background: var(--bl-green-deep);
+	color: #fff;
+	padding: clamp(36px, 7vw, 48px) max(var(--bl-gutter), env(safe-area-inset-left, 0px)) clamp(24px, 4vw, 30px);
+}
+.footer-inner { max-width: var(--bl-max); margin: 0 auto; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: clamp(24px, 5vw, 48px); margin-bottom: clamp(28px, 5vw, 44px); }
+.footer-logo-link { display: inline-block; margin-bottom: 14px; }
+.footer-logo-img { height: 36px; width: auto; filter: brightness(0) invert(1); }
+.footer-desc { font-size: 13px; opacity: 0.52; line-height: 1.75; max-width: 260px; margin-bottom: 18px; }
+.footer-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.footer-tag { font-size: 9px; background: rgba(196,92,0,0.18); color: var(--bl-gold); border-radius: 5px; padding: 3px 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+.footer-col-title { font-size: 9px; font-weight: 800; color: var(--bl-gold); text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 16px; }
+.footer-link { display: block; font-size: 13px; opacity: 0.52; padding: 5px 0; transition: opacity 0.2s; }
+.footer-link:hover { opacity: 0.85; }
+.footer-link:focus-visible { opacity: 1; outline: 2px solid var(--bl-gold); outline-offset: 2px; border-radius: 2px; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 22px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: 11px; opacity: 0.35; }
+
+/* ================================================================
+   EDITOR HELPER CLASSES (block editor only)
+   ================================================================ */
+.boundless-editor-affiliate, .boundless-editor-highlights { border: 1px dashed #b9d9c3; padding: 16px; border-radius: 8px; }
+.boundless-editor-button-row { display: flex; gap: 8px; }
+.boundless-editor-button-row button { padding: 8px 12px; border: 0; border-radius: 6px; background: var(--bl-green); color: #fff; }
+.boundless-editor-pill-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.boundless-editor-pill { padding: 6px 10px; background: var(--bl-green-light); border-radius: 999px; }
+.boundless-editor-subcategories { border: 1px dashed #b9d9c3; padding: 16px; border-radius: 8px; }
+
+/* ================================================================
+   MISSING STRUCTURAL CLASSES
+   ================================================================ */
+.bl-hero-content { flex: 1; min-width: 0; }
+.bl-breadcrumb-current { color: var(--bl-text); font-weight: 600; }
+.bl-showcase-active { box-shadow: 0 0 0 2px var(--bl-gold); }
+.bl-cart-items { display: flex; flex-direction: column; }
+.bl-contact-form-wrap { flex: 1; min-width: 0; }
+
+/* ================================================================
+   INLINE STYLE REPLACEMENTS
+   All inline styles moved here for clean, maintainable code.
+   ================================================================ */
+
+/* Hero subpage variants — inner spacing for non-homepage heroes */
+.bl-hero--checkout,
+.bl-hero--contact,
+.bl-hero--ingredient,
+.bl-hero--subcat,
+.bl-hero--cart { padding-bottom: clamp(36px, 6vw, 52px); }
+
+.bl-hero--cart { padding-bottom: clamp(24px, 4vw, 36px); }
+
+/* Hero title/desc defaults on subpages */
+.bl-hero--checkout .bl-hero-title,
+.bl-hero--contact .bl-hero-title,
+.bl-hero--ingredient .bl-hero-title,
+.bl-hero--subcat .bl-hero-title,
+.bl-hero--cart .bl-hero-title { margin-top: 10px; }
+
+.bl-hero--checkout .bl-hero-desc,
+.bl-hero--contact .bl-hero-desc,
+.bl-hero--ingredient .bl-hero-desc,
+.bl-hero--subcat .bl-hero-desc { opacity: 0.82; max-width: 540px; }
+
+/* Section with no top padding (follows a heading group) */
+.bl-section--flush { padding-top: 0 !important; }
+
+/* Showcase product card colour variants */
+.bl-showcase-visual--original { background: linear-gradient(135deg, #0A2E18, #1A5C38); }
+.bl-showcase-visual--natural  { background: linear-gradient(135deg, #1B4D2E, #2D6A2D); }
+.bl-showcase-visual--hotspot  { background: linear-gradient(135deg, #0D4A52, #1A7A8A); }
+.bl-showcase-visual--sensitive  { background: linear-gradient(135deg, #1E3320, #4A6741); }
+.bl-showcase-visual--itchrelief { background: linear-gradient(135deg, #122D35, #2C5F6A); }
+
+.bl-showcase-badge--natural { background: rgba(45,106,45,0.15); color: #2D6A2D; }
+.bl-showcase-badge--hotspot { background: rgba(13,74,82,0.15); color: #0D4A52; }
+.bl-showcase-badge--sensitive  { background: rgba(74,103,65,0.15); color: #4A6741; }
+.bl-showcase-badge--itchrelief { background: rgba(44,95,106,0.15); color: #2C5F6A; }
+
+/* Subcategory feature card colour variants */
+.bl-subcat-visual--original { background: linear-gradient(135deg, #0A2E18, #1A5C38); }
+.bl-subcat-visual--natural  { background: linear-gradient(135deg, #1B4D2E, #2D6A2D); }
+.bl-subcat-visual--hotspot  { background: linear-gradient(135deg, #0D4A52, #1A7A8A); }
+.bl-subcat-visual--sensitive  { background: linear-gradient(135deg, #1E3320, #4A6741); }
+.bl-subcat-visual--itchrelief { background: linear-gradient(135deg, #122D35, #2C5F6A); }
+
+/* Amazon section styling */
+.bl-amazon-eyebrow { color: #C45C00; }
+.bl-amazon-title { margin-bottom: 12px; color: #1C1C1C; }
+.bl-amazon-title strong { color: #1A5C38; }
+
+/* Cart empty state */
+.bl-cart-empty { display: none; }
+.bl-cart-empty.is-visible { display: block; }
+
+/* Checkout pricing grid */
+.bl-co-sizes-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 14px;
+	margin-bottom: 32px;
+}
+.bl-co-size-card {
+	background: #fff;
+	border-radius: 14px;
+	padding: 20px;
+	border: 1px solid var(--bl-green-border);
+	text-align: center;
+}
+.bl-co-size-card--best {
+	background: var(--bl-green);
+	color: #fff;
+	position: relative;
+	overflow: hidden;
+	border: none;
+}
+.bl-co-size-label {
+	font-size: 11px;
+	color: #888;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	margin-bottom: 6px;
+}
+.bl-co-size-card--best .bl-co-size-label { color: rgba(255,255,255,0.6); }
+.bl-co-size-vol {
+	font-size: 14px;
+	font-weight: 600;
+	margin-bottom: 6px;
+}
+.bl-co-size-price {
+	font-size: 26px;
+	font-weight: 800;
+	font-family: "Cormorant Garamond", serif;
+	color: var(--bl-green);
+}
+.bl-co-size-card--best .bl-co-size-price { color: #fff; }
+.bl-co-size-best-tag {
+	position: absolute;
+	top: 10px;
+	right: 12px;
+	background: var(--bl-gold);
+	color: var(--bl-green);
+	font-size: 8px;
+	font-weight: 800;
+	border-radius: 5px;
+	padding: 2px 7px;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+}
+
+@media (max-width: 599px) {
+	.bl-co-sizes-grid { grid-template-columns: 1fr; max-width: 320px; margin-left: auto; margin-right: auto; }
+}
+
+/* Light landing flush sections */
+.bll-ps-section--flush { padding-top: 0; }
+.bll-ing-section--flush { padding-top: 0; }
+
+/* ================================================================
+   CHECKOUT PAGE
+   ================================================================ */
+.bl-checkout-section {
+	max-width: 760px; margin: 0 auto;
+	padding: clamp(40px, 8vw, 72px) max(var(--bl-gutter), env(safe-area-inset-left, 0px)) clamp(40px, 8vw, 72px);
+}
+.bl-checkout-options { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 32px 0; }
+.bl-checkout-card {
+	background: #fff; border-radius: 16px; padding: 28px 24px;
+	border: 1px solid var(--bl-green-border); display: flex; flex-direction: column;
+	align-items: flex-start; gap: 12px;
+}
+.bl-checkout-card-logo { font-size: 24px; }
+.bl-checkout-card-name { font-size: 18px; font-weight: 700; font-family: "Cormorant Garamond", serif; color: var(--bl-green); }
+.bl-checkout-card-desc { font-size: 13px; color: #666; line-height: 1.55; flex: 1; }
+.bl-checkout-card-btn {
+	display: inline-flex; align-items: center; gap: 8px;
+	background: var(--bl-green); color: #fff;
+	border-radius: 10px; padding: 10px 22px; min-height: var(--bl-touch);
+	font-size: 13px; font-weight: 700; letter-spacing: 0.04em;
+	transition: background 0.2s; margin-top: auto;
+}
+.bl-checkout-card-btn:hover { background: var(--bl-green-mid); }
+.bl-checkout-card-btn.amazon { background: #FF9900; color: #111; }
+.bl-checkout-card-btn.amazon:hover { background: #e68a00; }
+.bl-checkout-note { font-size: 12px; color: #888; line-height: 1.6; margin-top: 24px; padding: 16px 20px; background: var(--bl-green-light); border-radius: 10px; border: 1px solid var(--bl-green-border); }
+
+/* ================================================================
+   USP TICKER — scrolling strip
+   ================================================================ */
+.bl-usp-bar {
+	background: var(--bl-green);
+	overflow: hidden;
+	padding: 14px 0;
+	border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.bl-usp-track {
+	display: flex;
+	gap: 3rem;
+	white-space: nowrap;
+	animation: bl-usp-scroll 28s linear infinite;
+	width: max-content;
+}
+@media (prefers-reduced-motion: reduce) {
+	.bl-usp-track { animation: none; overflow-x: auto; }
+}
+@keyframes bl-usp-scroll {
+	from { transform: translateX(0); }
+	to   { transform: translateX(-50%); }
+}
+.bl-usp-item {
+	display: inline-flex; align-items: center; gap: 10px;
+	font-size: 11px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase;
+	color: rgba(255,255,255,0.82); flex-shrink: 0;
+}
+.bl-usp-dot { width: 5px; height: 5px; background: #A8FFB8; border-radius: 50%; flex-shrink: 0; }
+
+/* ================================================================
+   PROBLEM / SOLUTION SECTION
+   ================================================================ */
+.bl-ps-section {
+	background: #fff;
+	padding: clamp(48px, 8vw, 72px) 0;
+}
+.bl-ps-intro {
+	font-size: clamp(14px, 1.8vw, 16px); color: #666; line-height: 1.7;
+	max-width: 560px; margin: 0 auto clamp(28px, 5vw, 48px); text-align: center;
+}
+.bl-ps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+.bl-ps-col { }
+.bl-ps-col-header {
+	font-family: "Cormorant Garamond", serif; font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+	font-weight: 700; margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 2px solid currentColor;
+}
+.bl-ps-problem .bl-ps-col-header { color: #B91C1C; border-color: #FCA5A5; }
+.bl-ps-solution .bl-ps-col-header { color: var(--bl-green); border-color: var(--bl-green-mid); }
+.bl-ps-item {
+	display: flex; align-items: flex-start; gap: 14px;
+	padding: 14px 0; border-bottom: 1px solid rgba(0,0,0,0.05);
+	font-size: clamp(13px, 1.4vw, 15px); line-height: 1.6; color: #1a1a1a;
+}
+.bl-ps-icon { font-size: 1.25rem; flex-shrink: 0; margin-top: 2px; }
+
+/* ================================================================
+   AMAZON / SHOP CTA SECTION
+   ================================================================ */
+.bl-amazon-section {
+	background: linear-gradient(135deg, #FFF3E8 0%, #FAF8F3 100%);
+	padding: clamp(48px, 8vw, 80px) 0;
+}
+.bl-amazon-sub {
+	font-size: clamp(13px, 1.6vw, 15px); color: #6B7280; line-height: 1.7;
+	max-width: 480px; margin: 0 auto 2rem;
+}
+.bl-amazon-btn {
+	display: inline-flex; align-items: center; gap: 12px;
+	background: #FF9900; color: #111;
+	padding: clamp(14px, 2.5vw, 18px) clamp(28px, 5vw, 44px);
+	border-radius: 100px; font-size: clamp(14px, 1.8vw, 16px); font-weight: 700;
+	text-decoration: none; box-shadow: 0 6px 24px rgba(255,153,0,0.32);
+	transition: all 0.2s; margin-bottom: 12px;
+}
+.bl-amazon-btn:hover { background: #e68a00; transform: translateY(-2px); box-shadow: 0 12px 36px rgba(255,153,0,0.4); }
+.bl-shop-btn {
+	display: inline-flex; align-items: center;
+	background: var(--bl-green); color: #fff;
+	padding: clamp(14px, 2.5vw, 18px) clamp(28px, 5vw, 44px);
+	border-radius: 100px; font-size: clamp(14px, 1.8vw, 16px); font-weight: 700;
+	margin-left: 12px; margin-bottom: 12px; transition: background 0.2s;
+}
+.bl-shop-btn:hover { background: var(--bl-green-mid); }
+.bl-price-tiers { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem; }
+.bl-price-tier {
+	background: #fff; padding: clamp(14px, 3vw, 20px) clamp(20px, 4vw, 28px);
+	border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+	text-align: left; min-width: 120px; position: relative;
+}
+.bl-pt-size { font-size: 12px; color: #6B7280; font-weight: 500; margin-bottom: 4px; }
+.bl-pt-price { font-size: clamp(1.375rem, 3vw, 1.625rem); font-weight: 700; color: var(--bl-green); font-family: "Cormorant Garamond", serif; }
+.bl-price-tier-best { background: var(--bl-green); color: #fff; }
+.bl-price-tier-best .bl-pt-size,
+.bl-price-tier-best .bl-pt-price { color: #fff; }
+.bl-pt-best {
+	font-size: 8px; font-weight: 800; background: var(--bl-gold); color: var(--bl-green);
+	border-radius: 5px; padding: 2px 7px; letter-spacing: 0.1em; text-transform: uppercase;
+	display: inline-block; margin-bottom: 6px;
+}
+
+/* ================================================================
+   LIGHT LANDING PAGE (bll-* prefix)
+   Based on Light color.html — cream/white background, Playfair-style headings
+   ================================================================ */
+.bll-hero {
+	min-height: 100vh;
+	display: grid; grid-template-columns: 1fr 1fr;
+	align-items: center; gap: 3rem;
+	padding: clamp(80px,12vw,120px) max(var(--bl-gutter), env(safe-area-inset-left, 0px)) clamp(40px,8vw,60px);
+	background: linear-gradient(135deg, #FAF8F3 0%, #F4FAF6 100%);
+	position: relative; overflow: hidden;
+}
+.bll-hero::before {
+	content: "";
+	position: absolute; top: -20%; right: -10%; width: 700px; height: 700px;
+	background: radial-gradient(circle, rgba(46,125,79,0.07) 0%, transparent 70%);
+	pointer-events: none;
+}
+.bll-paw {
+	position: absolute; top: 8%; left: 50%;
+	font-size: clamp(8rem, 15vw, 12rem); opacity: 0.04; pointer-events: none;
+	animation: bl-float 6s ease-in-out infinite;
+}
+@keyframes bl-float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)} }
+.bll-tag {
+	display: inline-flex; align-items: center; gap: 8px;
+	background: var(--bl-green-light); color: var(--bl-green);
+	padding: 6px 16px; border-radius: 100px;
+	font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+	margin-bottom: 1.5rem;
+}
+.bll-tag-dot { width: 7px; height: 7px; background: var(--bl-green-mid); border-radius: 50%; }
+.bll-headline {
+	font-family: "Cormorant Garamond", serif;
+	font-size: clamp(2.5rem, 5vw, 4.5rem);
+	font-weight: 700; line-height: 1.05; color: var(--bl-green);
+	letter-spacing: -0.02em; margin-bottom: 0.5rem;
+}
+.bll-headline em { color: var(--bl-green-mid); font-style: italic; }
+.bll-sub {
+	font-size: clamp(14px, 1.8vw, 17px); color: #6B7280; font-weight: 300;
+	line-height: 1.65; max-width: 480px; margin: 1.25rem 0 2.25rem;
+}
+.bll-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+.bll-btn-primary {
+	background: var(--bl-green); color: #fff;
+	padding: clamp(13px,2.5vw,16px) clamp(24px,4vw,36px); border-radius: 100px;
+	font-size: clamp(14px,1.6vw,16px); font-weight: 600;
+	box-shadow: 0 4px 20px rgba(26,92,56,0.25); transition: all 0.2s;
+}
+.bll-btn-primary:hover { background: var(--bl-green-mid); transform: translateY(-2px); }
+.bll-btn-secondary {
+	background: transparent; color: var(--bl-green);
+	padding: clamp(13px,2.5vw,16px) clamp(24px,4vw,36px); border-radius: 100px;
+	font-size: clamp(14px,1.6vw,16px); font-weight: 600;
+	border: 2px solid var(--bl-green); transition: all 0.2s;
+}
+.bll-btn-secondary:hover { background: var(--bl-green-light); }
+.bll-trust-strip { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.bll-trust-badge {
+	display: flex; align-items: center; gap: 6px;
+	font-size: 13px; font-weight: 500; color: var(--bl-green);
+	background: #fff; border: 1px solid rgba(46,125,79,0.2);
+	padding: 6px 14px; border-radius: 100px;
+}
+.bll-chk { color: var(--bl-green-mid); font-weight: 700; }
+/* Hero visual (mockup card) */
+.bll-hero-visual { position: relative; }
+.bll-product-mockup {
+	width: 100%; max-width: 400px; margin: 0 auto;
+	background: linear-gradient(145deg, var(--bl-green-light), #fff);
+	border-radius: 28px; padding: clamp(40px,6vw,60px) clamp(24px,5vw,40px);
+	box-shadow: 0 30px 80px rgba(26,92,56,0.14), 0 2px 0 rgba(255,255,255,0.8) inset;
+	display: flex; flex-direction: column; align-items: center; position: relative;
+}
+.bll-bottle-icon { font-size: clamp(4rem,8vw,7rem); animation: bl-float 5s ease-in-out infinite; }
+.bll-product-name { font-family: "Cormorant Garamond", serif; font-size: clamp(1.5rem,3vw,2rem); font-weight: 700; color: var(--bl-green); margin: 1rem 0 0.25rem; }
+.bll-product-desc { font-size: 13px; color: #6B7280; text-align: center; }
+.bll-product-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; margin-top: 1.25rem; }
+.bll-pbadge { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; padding: 5px 12px; border-radius: 100px; background: var(--bl-green); color: #fff; }
+.bll-pbadge-amber { background: #C45C00; }
+.bll-float-card {
+	position: absolute; background: #fff; border-radius: 14px; padding: 12px 16px;
+	box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+}
+.bll-float-left { left: -20px; top: 28%; }
+.bll-float-right { right: -10px; top: 58%; }
+.bll-fc-label { font-size: 10px; color: #6B7280; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 2px; }
+.bll-fc-value { font-size: 15px; font-weight: 700; color: var(--bl-green); }
+/* Light PS section */
+.bll-ps-section { background: #fff; padding: clamp(48px,8vw,80px) 0; }
+.bll-wrap { max-width: var(--bl-max); margin: 0 auto; padding: 0 max(var(--bl-gutter), env(safe-area-inset-left,0px)); }
+.bll-section-tag { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bl-green-mid); margin-bottom: 1rem; }
+.bll-headline2 { font-family: "Cormorant Garamond", serif; font-size: clamp(1.75rem,3.5vw,2.625rem); font-weight: 700; line-height: 1.1; color: #1C1C1C; letter-spacing: -0.01em; max-width: 640px; margin-bottom: 1rem; }
+.bll-headline2 strong { color: var(--bl-green); }
+.bll-body { font-size: clamp(14px,1.6vw,16px); color: #6B7280; line-height: 1.7; max-width: 560px; margin-bottom: 2.5rem; }
+.bll-ps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-top: 2.5rem; }
+.bll-ps-header { font-family: "Cormorant Garamond", serif; font-size: clamp(1.125rem,2vw,1.375rem); font-weight: 700; margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 2px solid currentColor; }
+.bll-ps-problem .bll-ps-header { color: #B91C1C; border-color: #FCA5A5; }
+.bll-ps-solution .bll-ps-header { color: var(--bl-green); border-color: var(--bl-green-mid); }
+.bll-ps-item { display: flex; align-items: flex-start; gap: 14px; padding: 14px 0; border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 14px; line-height: 1.6; color: #1a1a1a; }
+.bll-psi { font-size: 1.25rem; flex-shrink: 0; margin-top: 2px; }
+/* Light How-it-works */
+.bll-how-section { background: #F4FAF6; padding: clamp(48px,8vw,80px) 0; }
+.bll-steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.75rem; margin-top: 3rem; position: relative; }
+.bll-steps::before { content:""; position:absolute; top:40px; left:16%; right:16%; height:2px; background:linear-gradient(90deg, var(--bl-green-mid), var(--bl-green-light)); }
+.bll-step { background: #fff; border-radius: 22px; padding: clamp(28px,4vw,40px) clamp(20px,3vw,32px); text-align: center; box-shadow: 0 4px 24px rgba(26,92,56,0.07); transition: transform 0.3s, box-shadow 0.3s; position: relative; }
+.bll-step:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(26,92,56,0.12); }
+.bll-step-num { width: 54px; height: 54px; background: var(--bl-green); color: #fff; border-radius: 50%; font-size: clamp(1.125rem,2vw,1.375rem); font-weight: 700; font-family: "Cormorant Garamond", serif; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; box-shadow: 0 4px 16px rgba(26,92,56,0.25); }
+.bll-step-title { font-family: "Cormorant Garamond", serif; font-size: clamp(1.125rem,2vw,1.25rem); font-weight: 700; color: var(--bl-green); margin-bottom: 0.75rem; }
+.bll-step-body { font-size: 14px; color: #6B7280; line-height: 1.65; }
+/* Light Ingredients */
+.bll-ing-section { background: #FAF8F3; padding: clamp(48px,8vw,80px) 0; }
+.bll-ing-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 1.5rem; margin-top: 2.5rem; }
+.bll-ing-card { background: #fff; border-radius: 18px; padding: clamp(20px,3vw,28px); border: 1px solid rgba(46,125,79,0.1); display: flex; gap: 18px; align-items: flex-start; transition: all 0.3s; }
+.bll-ing-card:hover { border-color: var(--bl-green-mid); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(26,92,56,0.08); }
+.bll-ing-emoji { font-size: 2rem; flex-shrink: 0; }
+.bll-ing-name { font-weight: 700; font-size: clamp(14px,1.6vw,16px); color: var(--bl-green); margin-bottom: 4px; }
+.bll-ing-desc { font-size: 13px; color: #6B7280; line-height: 1.55; }
+/* Light Testimonials */
+.bll-test-section { background: var(--bl-green); color: #fff; padding: clamp(48px,8vw,80px) 0; }
+.bll-test-section .bll-section-tag { color: rgba(255,255,255,0.5); }
+.bll-test-section .bll-headline2 { color: #fff; }
+.bll-test-section .bll-headline2 strong { color: #A8FFB8; }
+.bll-test-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 2.5rem; }
+.bll-test-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: clamp(20px,3vw,30px); transition: background 0.3s; }
+.bll-test-card:hover { background: rgba(255,255,255,0.1); }
+.bll-test-stars { color: #FFD700; font-size: 14px; letter-spacing: 2px; margin-bottom: 1rem; }
+.bll-test-quote { font-size: 14px; line-height: 1.65; color: rgba(255,255,255,0.85); margin-bottom: 1.25rem; font-style: italic; }
+.bll-test-author { font-size: 12px; color: rgba(255,255,255,0.5); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* ================================================================
+   SINGLE POST TEMPLATE
+   ================================================================ */
+.bl-single-wrap { background: var(--bl-bg); }
+.bl-single-article {
+	padding: clamp(40px, 6vw, 64px) max(var(--bl-gutter), env(safe-area-inset-left, 0px)) clamp(40px, 6vw, 64px);
+}
+.bl-single-title {
+	font-family: "Cormorant Garamond", serif !important;
+	font-size: clamp(2rem, 4vw + 0.5rem, 3rem) !important;
+	font-weight: 700 !important; line-height: 1.1 !important;
+	color: var(--bl-green) !important; margin-bottom: 16px !important;
+	font-style: italic !important;
+}
+.bl-single-meta { gap: 12px; color: #888; font-size: 12px; margin-bottom: 24px; }
+.bl-meta-date, .bl-meta-author, .bl-meta-cats { font-size: 12px; color: #888; }
+.bl-meta-cats a { color: var(--bl-green-mid); font-weight: 600; }
+.bl-single-thumb { margin-bottom: 32px; }
+.bl-single-thumb img { border-radius: 16px; width: 100%; max-height: 440px; object-fit: cover; }
+.bl-single-content { font-size: clamp(15px, 1.6vw, 16px); line-height: 1.8; color: #333; }
+.bl-single-content h2,
+.bl-single-content h3,
+.bl-single-content h4 { font-family: "Cormorant Garamond", serif; color: var(--bl-green); margin: 2em 0 0.75em; font-style: italic; }
+.bl-single-content h2 { font-size: clamp(1.5rem, 3vw, 1.875rem); }
+.bl-single-content h3 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
+.bl-single-content p { margin-bottom: 1.25em; }
+.bl-single-content a { color: var(--bl-green-mid); text-decoration: underline; text-underline-offset: 3px; }
+.bl-single-content ul, .bl-single-content ol { padding-left: 1.5em; margin-bottom: 1.25em; }
+.bl-single-content li { margin-bottom: 0.4em; }
+.bl-single-content blockquote {
+	border-left: 4px solid var(--bl-green-mid); padding-left: 1.25em;
+	margin: 1.5em 0; font-style: italic; color: #555;
+}
+.bl-single-content img { border-radius: 12px; margin: 1.5em 0; }
+.bl-single-tags { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--bl-green-border); }
+.bl-single-tags a { background: var(--bl-green-light); color: var(--bl-green); border-radius: 100px; padding: 4px 12px; font-size: 11px; font-weight: 600; margin: 2px; }
+.bl-single-divider { border: none; border-top: 1px solid var(--bl-green-border); margin: 0; }
+.bl-related-posts-wrap {
+	padding: clamp(40px, 6vw, 64px) max(var(--bl-gutter), env(safe-area-inset-left, 0px)) clamp(40px, 6vw, 64px);
+}
+.bl-related-title { font-family: "Cormorant Garamond", serif !important; font-size: clamp(1.5rem, 2.5vw, 1.75rem) !important; color: var(--bl-green) !important; font-style: italic !important; margin-bottom: 24px !important; }
+
+/* ================================================================
+   ARCHIVE / BLOG LIST TEMPLATE
+   ================================================================ */
+.bl-archive-header {
+	background: linear-gradient(135deg, #1A5C38 0%, #2E7D4F 100%);
+	color: #fff; padding: clamp(36px, 6vw, 56px) 0;
+}
+.bl-archive-title { font-family: "Cormorant Garamond", serif !important; font-size: clamp(2rem, 4vw, 2.75rem) !important; font-style: italic !important; color: #fff !important; margin-bottom: 8px !important; }
+.bl-archive-desc { font-size: 15px !important; opacity: 0.72; max-width: 540px; line-height: 1.65; }
+.bl-archive-grid-wrap {
+	padding: clamp(36px, 6vw, 56px) max(var(--bl-gutter), env(safe-area-inset-left, 0px)) clamp(48px, 8vw, 72px);
+}
+.bl-no-results { text-align: center; padding: 48px 0; color: #888; font-size: 15px; }
+.bl-post-meta { font-size: 11px; color: #999; margin-top: 10px; }
+.bl-post-meta a { color: var(--bl-green-mid); }
+.bl-pagination { margin-top: 40px; gap: 6px; }
+.bl-pagination .wp-block-query-pagination-previous-arrow,
+.bl-pagination .wp-block-query-pagination-next-arrow { display: none; }
+.bl-pagination .page-numbers {
+	padding: 8px 14px; border-radius: 8px; border: 1px solid var(--bl-green-border);
+	font-size: 13px; font-weight: 600; color: var(--bl-green); transition: all 0.2s;
+}
+.bl-pagination .page-numbers.current,
+.bl-pagination .page-numbers:hover { background: var(--bl-green); color: #fff; border-color: var(--bl-green); }
+
+/* ================================================================
+   PAGE TEMPLATE
+   ================================================================ */
+.bl-page-wrap { background: var(--bl-bg); }
+.bl-page-article {
+	padding: clamp(40px, 6vw, 64px) max(var(--bl-gutter), env(safe-area-inset-left, 0px)) clamp(56px, 8vw, 80px);
+}
+.bl-page-title { font-family: "Cormorant Garamond", serif !important; font-size: clamp(2rem, 4vw, 3rem) !important; font-weight: 700 !important; font-style: italic !important; color: var(--bl-green) !important; margin-bottom: 28px !important; }
+.bl-page-thumb { margin-bottom: 32px; }
+.bl-page-thumb img { border-radius: 16px; width: 100%; max-height: 480px; object-fit: cover; }
+.bl-page-content { font-size: clamp(15px, 1.6vw, 16px); line-height: 1.8; color: #333; }
+.bl-page-content h2,
+.bl-page-content h3 { font-family: "Cormorant Garamond", serif; color: var(--bl-green); margin: 2em 0 0.75em; font-style: italic; }
+.bl-page-content p { margin-bottom: 1.25em; }
+.bl-page-content a { color: var(--bl-green-mid); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ================================================================
+   RESPONSIVE BREAKPOINTS
+   ================================================================ */
+@media (max-width: 900px) {
+	.bl-hero-grid { grid-template-columns: 1fr; }
+	.bl-bottle-wrap { display: none; }
+	.bl-benefits-grid, .bl-dogs-grid { grid-template-columns: 1fr; }
+	.bl-reviews-grid { grid-template-columns: 1fr 1fr; }
+	.bl-ing-grid { grid-template-columns: 1fr 1fr; }
+	.bl-steps-grid { grid-template-columns: 1fr 1fr; }
+	.bl-step-connector { display: none; }
+	.footer-grid { grid-template-columns: 1fr 1fr; }
+	.bl-checkout-options { grid-template-columns: 1fr; }
+	.bl-related-grid { grid-template-columns: 1fr 1fr; }
+	.bl-product-hero-grid { grid-template-columns: 1fr; }
+	.bl-product-tabs-col { display: none; }
+	/* Showcase carousel — reduce padding on tablet */
+	.bl-showcase-track-wrap { padding: 0 24px; }
+	.bl-showcase-prev, .bl-showcase-next { width: 36px; height: 36px; font-size: 18px; }
+	/* Problem/Solution */
+	.bl-ps-grid { grid-template-columns: 1fr; }
+	.bll-ps-grid { grid-template-columns: 1fr; }
+	/* Light hero — stack columns, keep visual visible */
+	.bll-hero { grid-template-columns: 1fr; text-align: center; min-height: auto; padding-top: clamp(60px, 10vw, 80px); }
+	.bll-sub { margin-left: auto; margin-right: auto; }
+	.bll-btns, .bll-trust-strip { justify-content: center; }
+	.bll-hero-visual { order: -1; }
+	.bll-product-mockup { max-width: 280px; padding: clamp(28px, 5vw, 40px) clamp(20px, 4vw, 32px); }
+	.bll-float-left, .bll-float-right { display: none; }
+	/* Steps */
+	.bll-steps { grid-template-columns: 1fr; }
+	.bll-steps::before { display: none; }
+	/* Tests */
+	.bll-test-grid { grid-template-columns: 1fr; }
+	/* Price tiers */
+	.bl-price-tiers { gap: 0.75rem; }
+}
+
+@media (max-width: 599px) {
+	.bl-ing-grid { grid-template-columns: 1fr; }
+	.bl-steps-grid { grid-template-columns: 1fr; }
+	.footer-grid { grid-template-columns: 1fr; }
+	.footer-bottom { flex-direction: column; text-align: center; }
+	.bl-benefits-grid { grid-template-columns: 1fr; }
+	.bl-reviews-grid { grid-template-columns: 1fr; }
+	.bl-related-grid { grid-template-columns: 1fr; }
+	.bl-purchase-row { flex-direction: column; align-items: flex-start; }
+	.bll-ing-grid { grid-template-columns: 1fr; }
+	.bl-amazon-btn, .bl-shop-btn { width: 100%; justify-content: center; margin-left: 0; }
+	/* Tab bar — horizontal scroll with snap */
+	.bl-tab-btn { padding: 10px 12px; font-size: 11px; }
+	.bl-tab-bar { scroll-snap-type: x mandatory; gap: 0; }
+	.bl-tab-btn { scroll-snap-align: start; }
+	/* Benefit card icon smaller */
+	.bl-benefit-card { grid-template-columns: 40px 1fr; column-gap: 14px; }
+	.bl-benefit-icon { width: 40px; height: 40px; font-size: 16px; }
+	.bl-price-tiers { flex-direction: column; align-items: stretch; max-width: 320px; margin-left: auto; margin-right: auto; }
+	/* Footer — centered on phone */
+	.footer-grid > div { text-align: center; }
+	.footer-desc { margin-left: auto; margin-right: auto; }
+	.footer-tags { justify-content: center; }
+	/* Cart item — stack controls below info */
+	.bl-cart-item { flex-direction: column; align-items: stretch; gap: 16px; }
+	.bl-cart-item-controls { flex-direction: row; align-items: center; justify-content: space-between; }
+	.bl-cart-item-visual { width: 60px; height: 60px; font-size: 2rem; align-self: center; }
+	.bl-cart-item-info { min-width: 0; }
+	/* Stats bar — tighter on small screens */
+	.bl-stats-inner { gap: 6px; }
+	.bl-stat { padding: 4px 4px; }
+	.bl-stat-val { font-size: 0.875rem; }
+	.bl-stat-label { font-size: 8px; letter-spacing: 0.06em; }
+	/* Checkout product card stacking */
+	.bl-co-product { flex-direction: column; text-align: center; gap: 12px; }
+	.bl-co-product-price { font-size: 1.75rem; }
+	/* Checkout options stacking */
+	.bl-checkout-options { grid-template-columns: 1fr; }
+	/* CTA section buttons */
+	.bl-cta-purchase { flex-direction: column; align-items: center; }
+	.bl-cta-btn { width: 100%; max-width: 320px; }
+	/* Subcategory feature card visual */
+	.bl-subcat-feature-visual { min-height: 120px; }
+	/* Contact info cards — add spacing when stacked */
+	.bl-contact-info { margin-top: 8px; }
+	/* Hero badge text */
+	.bl-hero-badge span { font-size: 8px; }
+	/* Light landing hero on phone */
+	.bll-hero { gap: 2rem; }
+	.bll-product-mockup { max-width: 220px; }
+	.bll-headline { font-size: clamp(2rem, 8vw, 2.5rem); }
+	/* Blog post cards */
+	.bl-post-card { padding: 20px 18px; }
+}
+
+@media (max-width: 399px) {
+	:root { --bl-gutter: 14px; }
+	/* Extra-small phone refinements */
+	.bl-hero-title { font-size: clamp(1.75rem, 8vw, 2.25rem); }
+	.bl-section-title { font-size: clamp(1.5rem, 7vw, 1.75rem); }
+	.bl-add-btn { width: 100%; justify-content: center; padding: 12px 20px; }
+	.bl-buy-controls { width: 100%; }
+	.bl-cart-checkout-btn { font-size: 12px; padding: 12px 14px; }
+	.nav-logo-img { height: 24px; }
+	.cart-btn { font-size: 10px; padding: 0 10px; min-height: 32px; }
+}
+
+/* ================================================================
+   LANDSCAPE PHONES  (short + wide viewport)
+   Reduce vertical spacing so key content stays visible.
+   ================================================================ */
+@media (max-height: 500px) and (orientation: landscape) {
+	.bll-hero { min-height: auto; padding-top: 60px; padding-bottom: 40px; }
+	.bl-hero { padding-top: 32px; }
+	.bl-404-hero { min-height: 60vh; }
+	.bl-404-inner { padding: 36px 0; }
+	/* Nav stays as column panel on landscape phones — no override */
+}
+
+/* ================================================================
+   SAFE-AREA REFINEMENTS — notched / Dynamic Island devices
+   Ensures content clears the notch and home indicator on all edges.
+   ================================================================ */
+@supports (padding: env(safe-area-inset-bottom)) {
+	footer { padding-bottom: max(clamp(24px, 4vw, 30px), env(safe-area-inset-bottom)); }
+	.bl-cta-section { padding-bottom: max(clamp(48px, 8vw, 72px), env(safe-area-inset-bottom)); }
+	.bl-404-hero { padding-bottom: env(safe-area-inset-bottom); }
+}
+
+/* ================================================================
+   BLOG INDEX HEADER (fallback template)
+   ================================================================ */
+.bl-index-header {
+	background: linear-gradient(135deg, #1A5C38 0%, #2E7D4F 100%);
+	color: #fff;
+	padding: clamp(36px, 6vw, 56px) 0;
+}
+
+/* ================================================================
+   CHECKOUT PRODUCT SUMMARY CARD
+   ================================================================ */
+.bl-co-product {
+	display: flex;
+	align-items: center;
+	gap: 18px;
+	padding: 20px 24px;
+	background: #fff;
+	border-radius: 14px;
+	border: 1px solid var(--bl-green-border);
+	margin-bottom: 32px;
+	flex-wrap: wrap;
+}
+.bl-co-product-icon {
+	width: 52px;
+	height: 52px;
+	border-radius: 12px;
+	background: var(--bl-green-light);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 26px;
+	flex-shrink: 0;
+}
+.bl-co-product-info { flex: 1; min-width: 0; }
+.bl-co-product-name {
+	font-family: "Cormorant Garamond", serif;
+	font-size: 20px;
+	font-weight: 700;
+	color: var(--bl-green);
+}
+.bl-co-product-sub { font-size: 12px; color: #666; margin-top: 2px; }
+.bl-co-product-price {
+	font-size: 32px;
+	font-weight: 800;
+	font-family: "Cormorant Garamond", serif;
+	color: var(--bl-green);
+	flex-shrink: 0;
+}
+.bl-co-section-title {
+	font-family: "Cormorant Garamond", serif;
+	font-size: 1.5rem;
+	font-weight: 700;
+	margin-bottom: 4px;
+	color: var(--bl-green);
+}
+.bl-co-section-sub { font-size: 13px; color: #666; margin-bottom: 20px; }
+
+/* ================================================================
+   404 PAGE
+   ================================================================ */
+.bl-404-hero {
+	background: linear-gradient(135deg, #1A5C38 0%, #2E7D4F 60%, #3D9962 100%);
+	color: #fff;
+	min-height: 72vh;
+	display: flex;
+	align-items: center;
+}
+.bl-404-inner {
+	text-align: center;
+	padding: clamp(56px, 10vw, 96px) 0;
+}
+.bl-404-code {
+	font-family: "Cormorant Garamond", serif;
+	font-size: clamp(80px, 18vw, 140px);
+	font-weight: 700;
+	line-height: 1;
+	color: rgba(255,255,255,0.12);
+	margin-bottom: -0.2em;
+	letter-spacing: -0.02em;
+}
+.bl-404-title {
+	font-family: "Cormorant Garamond", serif;
+	font-size: clamp(1.75rem, 5vw, 3rem);
+	font-weight: 700;
+	font-style: italic;
+	color: #fff;
+	margin-bottom: 16px;
+}
+.bl-404-desc {
+	font-size: clamp(14px, 1.6vw, 16px);
+	color: rgba(255,255,255,0.72);
+	max-width: 480px;
+	margin: 0 auto 36px;
+	line-height: 1.65;
+}
+.bl-404-actions {
+	display: flex;
+	gap: 12px;
+	justify-content: center;
+	flex-wrap: wrap;
+	margin-bottom: 36px;
+}
+.bl-404-btn-primary {
+	background: var(--bl-gold);
+	color: #0F3D24;
+	font-weight: 700;
+	font-size: 14px;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	padding: 14px 28px;
+	border-radius: 10px;
+	transition: opacity 0.18s;
+}
+.bl-404-btn-primary:hover { opacity: 0.88; }
+.bl-404-btn-secondary {
+	background: rgba(255,255,255,0.10);
+	color: #fff;
+	font-weight: 600;
+	font-size: 14px;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	padding: 14px 28px;
+	border-radius: 10px;
+	border: 1px solid rgba(255,255,255,0.22);
+	transition: background 0.18s;
+}
+.bl-404-btn-secondary:hover { background: rgba(255,255,255,0.18); }
+.bl-404-links {
+	display: flex;
+	gap: 20px;
+	justify-content: center;
+	flex-wrap: wrap;
+	font-size: 13px;
+	color: rgba(255,255,255,0.5);
+}
+.bl-404-links a { color: rgba(255,255,255,0.72); transition: color 0.15s; }
+.bl-404-links a:hover { color: #fff; }
+
+/* (Product switcher removed — replaced by category dropdown menus) */
+
+/* ================================================================
+   SLIDING PRODUCT SHOWCASE / CAROUSEL
+   ================================================================ */
+.bl-showcase-slider {
+	background: var(--bl-bg);
+	padding: clamp(48px, 8vw, 72px) 0 clamp(36px, 6vw, 48px);
+}
+.bl-showcase-header {
+	text-align: center;
+	margin-bottom: clamp(24px, 4vw, 40px);
+}
+.bl-showcase-track-wrap {
+	position: relative;
+	overflow: hidden;
+	padding: 0 48px;
+}
+.bl-showcase-track {
+	display: flex;
+	width: 100%;
+	gap: 24px;
+	transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	will-change: transform;
+}
+.bl-showcase-card {
+	flex: 0 0 calc(33.333% - 16px);
+	background: #fff;
+	border-radius: 20px;
+	overflow: hidden;
+	border: 1px solid var(--bl-green-border);
+	transition: transform 0.3s, box-shadow 0.3s;
+}
+.bl-showcase-card:hover {
+	transform: translateY(-6px);
+	box-shadow: 0 16px 48px rgba(15,61,36,0.12);
+}
+.bl-showcase-visual {
+	height: 200px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+.bl-showcase-bottle-icon {
+	font-size: 4rem;
+	filter: drop-shadow(0 8px 24px rgba(0,0,0,0.2));
+}
+.bl-showcase-info {
+	padding: clamp(18px, 3vw, 28px) clamp(16px, 2.5vw, 24px);
+}
+.bl-showcase-badge {
+	display: inline-block;
+	font-size: 9px;
+	font-weight: 800;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	background: rgba(201,162,39,0.15);
+	color: var(--bl-gold);
+	padding: 3px 10px;
+	border-radius: 5px;
+	margin-bottom: 10px;
+}
+.bl-showcase-name {
+	font-family: "Cormorant Garamond", serif;
+	font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+	font-weight: 700;
+	font-style: italic;
+	color: var(--bl-green);
+	margin-bottom: 8px;
+}
+.bl-showcase-desc {
+	font-size: 13px;
+	color: #666;
+	line-height: 1.6;
+	margin-bottom: 14px;
+}
+.bl-showcase-price {
+	font-family: "Cormorant Garamond", serif;
+	font-size: 1.5rem;
+	font-weight: 800;
+	color: var(--bl-green);
+	margin-bottom: 14px;
+}
+.bl-showcase-price span { font-size: 12px; opacity: 0.52; font-family: "Jost", sans-serif; font-weight: 400; margin-left: 4px; }
+.bl-showcase-btn {
+	display: inline-flex;
+	align-items: center;
+	font-size: 13px;
+	font-weight: 700;
+	color: var(--bl-green-mid);
+	transition: color 0.2s;
+}
+.bl-showcase-btn:hover { color: var(--bl-green); }
+
+/* Arrows */
+.bl-showcase-arrow {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 10;
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	background: #fff;
+	border: 1px solid var(--bl-green-border);
+	color: var(--bl-green);
+	font-size: 24px;
+	font-weight: 300;
+	cursor: pointer;
+	box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.2s;
+}
+.bl-showcase-arrow:hover { background: var(--bl-green); color: #fff; }
+.bl-showcase-prev { left: 2px; }
+.bl-showcase-next { right: 2px; }
+
+/* Dots */
+.bl-showcase-dots {
+	display: flex;
+	justify-content: center;
+	gap: 8px;
+	margin-top: 24px;
+}
+.bl-showcase-dot {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	border: 2px solid var(--bl-green-border);
+	background: transparent;
+	cursor: pointer;
+	transition: all 0.2s;
+	padding: 0;
+}
+.bl-showcase-dot.active { background: var(--bl-green); border-color: var(--bl-green); }
+
+@media (max-width: 900px) {
+	.bl-showcase-card { flex: 0 0 calc(50% - 12px); }
+	.bl-showcase-prev { left: 2px; }
+	.bl-showcase-next { right: 2px; }
+}
+@media (max-width: 599px) {
+	.bl-showcase-card { flex: 0 0 100%; }
+	.bl-showcase-track-wrap { padding: 0; }
+	.bl-showcase-arrow { display: none; }
+}
+
+/* ================================================================
+   PRODUCT DETAILS PAGE — POSTERS GRID
+   ================================================================ */
+.bl-posters-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 18px;
+}
+.bl-poster-card {
+	background: #fff;
+	border-radius: 16px;
+	padding: clamp(24px, 4vw, 32px) clamp(20px, 3vw, 26px);
+	border: 1px solid var(--bl-green-border);
+	text-align: center;
+	transition: transform 0.3s, box-shadow 0.3s;
+}
+.bl-poster-card:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 12px 36px rgba(15,61,36,0.1);
+}
+.bl-poster-visual { font-size: 3rem; margin-bottom: 16px; }
+.bl-poster-title {
+	font-family: "Cormorant Garamond", serif;
+	font-size: 1.25rem;
+	font-weight: 700;
+	font-style: italic;
+	color: var(--bl-green);
+	margin-bottom: 10px;
+}
+.bl-poster-desc { font-size: 13px; color: #666; line-height: 1.65; }
+
+@media (max-width: 900px) { .bl-posters-grid { grid-template-columns: 1fr; } }
+
+/* ================================================================
+   INGREDIENT PAGE — SAFETY GRID
+   ================================================================ */
+.bl-safety-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 14px;
+	max-width: 800px;
+	margin: 0 auto;
+}
+.bl-safety-card {
+	display: flex;
+	align-items: flex-start;
+	gap: 14px;
+	padding: 18px 20px;
+	background: #fff;
+	border-radius: 12px;
+	border: 1px solid var(--bl-green-border);
+}
+.bl-safety-icon {
+	width: 32px;
+	height: 32px;
+	border-radius: 8px;
+	background: var(--bl-green-light);
+	color: var(--bl-green-mid);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 14px;
+	font-weight: 700;
+	flex-shrink: 0;
+}
+.bl-safety-text { font-size: 13px; line-height: 1.6; color: #444; }
+
+@media (max-width: 599px) { .bl-safety-grid { grid-template-columns: 1fr; } }
+
+/* ================================================================
+   CONTACT PAGE
+   ================================================================ */
+.bl-hero--contact { padding-bottom: clamp(36px, 6vw, 52px); }
+
+.bl-contact-section {
+	max-width: var(--bl-max);
+	margin: 0 auto;
+	padding: clamp(40px, 8vw, 72px) max(var(--bl-gutter), env(safe-area-inset-left, 0px));
+}
+.bl-contact-grid {
+	display: grid;
+	grid-template-columns: 1.4fr 1fr;
+	gap: clamp(24px, 5vw, 48px);
+	align-items: start;
+}
+.bl-contact-heading {
+	font-family: "Cormorant Garamond", serif;
+	font-size: 1.5rem;
+	font-weight: 700;
+	font-style: italic;
+	color: var(--bl-green);
+	margin-bottom: 24px;
+}
+.bl-contact-form { display: flex; flex-direction: column; gap: 18px; }
+.bl-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.bl-form-group { display: flex; flex-direction: column; gap: 6px; }
+.bl-form-label {
+	font-size: 12px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: var(--bl-green);
+}
+.bl-form-input {
+	font-family: "Jost", sans-serif;
+	font-size: 14px;
+	padding: 12px 16px;
+	border: 1px solid var(--bl-green-border);
+	border-radius: 10px;
+	background: #fff;
+	color: #1a1a1a;
+	transition: border-color 0.2s;
+}
+.bl-form-input:focus {
+	outline: none;
+	border-color: var(--bl-green-mid);
+	box-shadow: 0 0 0 3px rgba(26,92,56,0.1);
+}
+.bl-form-textarea { resize: vertical; min-height: 120px; }
+.bl-form-submit {
+	background: var(--bl-green);
+	color: #fff;
+	border: none;
+	border-radius: 10px;
+	padding: 14px 32px;
+	font-family: "Jost", sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition: background 0.2s;
+	align-self: flex-start;
+}
+.bl-form-submit:hover { background: var(--bl-green-mid); }
+
+/* Form success / error notices */
+.bl-form-notice {
+	padding: 14px 18px;
+	border-radius: 10px;
+	font-size: 14px;
+	font-weight: 500;
+	margin-bottom: 18px;
+	line-height: 1.5;
+}
+.bl-form-success {
+	background: var(--bl-green-light);
+	color: var(--bl-green);
+	border: 1px solid var(--bl-green-border);
+}
+.bl-form-error {
+	background: #FEF2F2;
+	color: #991B1B;
+	border: 1px solid #FECACA;
+}
+
+.bl-contact-info { display: flex; flex-direction: column; gap: 16px; }
+.bl-contact-card {
+	background: #fff;
+	border-radius: 14px;
+	padding: 22px 20px;
+	border: 1px solid var(--bl-green-border);
+}
+.bl-contact-card-icon { font-size: 20px; margin-bottom: 8px; }
+.bl-contact-card-title {
+	font-family: "Cormorant Garamond", serif;
+	font-size: 1.125rem;
+	font-weight: 700;
+	color: var(--bl-green);
+	margin-bottom: 6px;
+}
+.bl-contact-card-text { font-size: 13px; color: #666; line-height: 1.55; }
+
+@media (max-width: 900px) {
+	.bl-contact-grid { grid-template-columns: 1fr; }
+	.bl-form-row { grid-template-columns: 1fr; }
+}
+
+/* ================================================================
+   CART PAGE
+   ================================================================ */
+.bl-hero--cart { padding-bottom: clamp(24px, 4vw, 36px); }
+
+.bl-cart-section {
+	max-width: var(--bl-max);
+	margin: 0 auto;
+	padding: clamp(36px, 7vw, 64px) max(var(--bl-gutter), env(safe-area-inset-left, 0px));
+}
+.bl-cart-grid {
+	display: grid;
+	grid-template-columns: 1.5fr 1fr;
+	gap: clamp(24px, 5vw, 48px);
+	align-items: start;
+}
+
+/* Cart item row */
+.bl-cart-item {
+	display: flex;
+	gap: 20px;
+	padding: 24px;
+	background: #fff;
+	border-radius: 16px;
+	border: 1px solid var(--bl-green-border);
+	margin-bottom: 16px;
+	flex-wrap: wrap;
+	align-items: center;
+}
+.bl-cart-item-visual {
+	width: 80px;
+	height: 80px;
+	border-radius: 14px;
+	background: var(--bl-green-light);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 2.5rem;
+	flex-shrink: 0;
+}
+.bl-cart-item-info { flex: 1; min-width: 180px; }
+.bl-cart-item-name {
+	font-family: "Cormorant Garamond", serif;
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: var(--bl-green);
+	margin-bottom: 4px;
+}
+.bl-cart-item-sub { font-size: 12px; color: #666; margin-bottom: 8px; }
+.bl-cart-item-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.bl-cart-tag {
+	font-size: 10px;
+	font-weight: 600;
+	background: var(--bl-green-light);
+	color: var(--bl-green-mid);
+	padding: 3px 10px;
+	border-radius: 100px;
+	letter-spacing: 0.04em;
+}
+.bl-cart-item-controls {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 10px;
+}
+.bl-cart-qty {
+	display: flex;
+	align-items: center;
+	border: 1px solid var(--bl-green-border);
+	border-radius: 9px;
+	overflow: hidden;
+	background: #fff;
+}
+.bl-cart-qty .bl-qty-btn {
+	width: 36px;
+	height: 36px;
+	background: none;
+	border: none;
+	color: var(--bl-green);
+	font-size: 18px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background 0.15s;
+}
+.bl-cart-qty .bl-qty-btn:hover { background: var(--bl-green-light); }
+.bl-cart-qty .bl-qty-val { width: 28px; text-align: center; font-size: 14px; font-weight: 700; color: var(--bl-green); }
+.bl-cart-item-price {
+	font-family: "Cormorant Garamond", serif;
+	font-size: 1.5rem;
+	font-weight: 800;
+	color: var(--bl-green);
+}
+
+/* Cart remove button */
+.bl-cart-remove {
+	background: none;
+	border: none;
+	color: #999;
+	font-size: 12px;
+	cursor: pointer;
+	padding: 4px 0;
+	transition: color 0.2s;
+	font-family: "Jost", sans-serif;
+}
+.bl-cart-remove:hover { color: #B91C1C; }
+
+/* Hide static placeholder until JS processes the real cart state */
+#bl-cart-item-original { display: none; }
+
+/* Cart empty */
+.bl-cart-empty { text-align: center; padding: 48px 24px; }
+.bl-cart-empty-icon { font-size: 3rem; margin-bottom: 16px; }
+.bl-cart-empty-title { font-family: "Cormorant Garamond", serif; font-size: 1.5rem; color: var(--bl-green); margin-bottom: 8px; }
+.bl-cart-empty-desc { font-size: 14px; color: #666; margin-bottom: 24px; }
+
+/* Cart summary sidebar */
+.bl-cart-summary {
+	background: #fff;
+	border-radius: 16px;
+	border: 1px solid var(--bl-green-border);
+	padding: clamp(24px, 4vw, 32px);
+	position: sticky;
+	top: calc(var(--bl-nav-h) + 24px);
+}
+.bl-cart-summary-title {
+	font-family: "Cormorant Garamond", serif;
+	font-size: 1.375rem;
+	font-weight: 700;
+	color: var(--bl-green);
+	margin-bottom: 20px;
+}
+.bl-cart-summary-row {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px 0;
+	font-size: 14px;
+	color: #444;
+	border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.bl-cart-total-row {
+	font-weight: 700;
+	font-size: 16px;
+	color: var(--bl-green);
+	border-bottom: none;
+	padding-bottom: 0;
+}
+.bl-cart-free-shipping {
+	font-size: 12px;
+	color: var(--bl-green-mid);
+	font-weight: 600;
+	margin: 12px 0 24px;
+}
+.bl-cart-checkout-heading {
+	font-family: "Cormorant Garamond", serif;
+	font-size: 1.125rem;
+	font-weight: 700;
+	color: var(--bl-green);
+	margin-bottom: 6px;
+}
+.bl-cart-checkout-note { font-size: 12px; color: #888; margin-bottom: 16px; }
+.bl-cart-checkout-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+.bl-cart-checkout-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	padding: 12px 20px;
+	border-radius: 10px;
+	font-size: 13px;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	transition: all 0.2s;
+	text-align: center;
+}
+.bl-cart-btn-amazon { background: #FF9900; color: #111; }
+.bl-cart-btn-amazon:hover { background: #e68a00; }
+.bl-cart-btn-shop { background: var(--bl-green); color: #fff; }
+.bl-cart-btn-shop:hover { background: var(--bl-green-mid); }
+.bl-cart-btn-other { background: var(--bl-green-light); color: var(--bl-green); border: 1px solid var(--bl-green-border); }
+.bl-cart-btn-other:hover { background: var(--bl-green-border); }
+.bl-cart-guarantee {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	font-size: 12px;
+	color: #666;
+	padding-top: 16px;
+	border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+@media (max-width: 900px) {
+	.bl-cart-grid { grid-template-columns: 1fr; }
+	.bl-cart-summary { position: static; }
+}
+
+/* ================================================================
+   RELATED PRODUCTS (bottom of product, contact, ingredient, cart pages)
+   ================================================================ */
+.bl-related-products {
+	background: var(--bl-bg);
+	padding: clamp(48px, 8vw, 72px) 0;
+}
+.bl-related-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 18px;
+}
+.bl-related-card {
+	background: #fff;
+	border-radius: 16px;
+	overflow: hidden;
+	border: 1px solid var(--bl-green-border);
+	transition: transform 0.3s, box-shadow 0.3s;
+	text-decoration: none;
+	color: inherit;
+	display: block;
+}
+.bl-related-card:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 12px 36px rgba(15,61,36,0.10);
+}
+.bl-related-visual {
+	height: 140px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.bl-related-icon { font-size: 3rem; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2)); }
+.bl-related-info { padding: 18px 16px; }
+.bl-related-name {
+	font-family: "Cormorant Garamond", serif;
+	font-size: 1.125rem;
+	font-weight: 700;
+	font-style: italic;
+	color: var(--bl-green);
+	margin-bottom: 4px;
+}
+.bl-related-type { font-size: 11px; color: #888; margin-bottom: 10px; }
+.bl-related-price {
+	font-family: "Cormorant Garamond", serif;
+	font-size: 1.25rem;
+	font-weight: 800;
+	color: var(--bl-green);
+}
+@media (max-width: 900px) {
+	.bl-related-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 599px) {
+	.bl-related-grid { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; }
+}
+
+/* ================================================================
+   SUBCATEGORY LISTING (on category.html)
+   ================================================================ */
+.bl-subcategories { margin-top: clamp(24px, 4vw, 40px); }
+.bl-subcat-title {
+	font-family: "Cormorant Garamond", serif;
+	font-size: 1.5rem;
+	font-weight: 700;
+	font-style: italic;
+	color: var(--bl-green);
+	margin-bottom: 18px;
+}
+.bl-subcat-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 16px;
+}
+.bl-subcat-card {
+	background: #fff;
+	border-radius: 14px;
+	padding: 22px 20px;
+	border: 1px solid var(--bl-green-border);
+	transition: all 0.2s;
+}
+.bl-subcat-card:hover {
+	border-color: var(--bl-green-mid);
+	transform: translateY(-3px);
+	box-shadow: 0 8px 24px rgba(15,61,36,0.08);
+}
+.bl-subcat-card a {
+	font-family: "Cormorant Garamond", serif;
+	font-size: 1.125rem;
+	font-weight: 700;
+	color: var(--bl-green);
+}
+.bl-subcat-count {
+	font-size: 12px;
+	color: #888;
+	margin-top: 4px;
+}
+
+@media (max-width: 900px) { .bl-subcat-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 599px) { .bl-subcat-grid { grid-template-columns: 1fr; } }
+
+/* ================================================================
+   HERO VARIANTS — Product, Ingredient pages
+   ================================================================ */
+/* Product page hero — 3-column grid matching Screen1.png */
+.bl-hero--product { padding-bottom: 0; }
+.bl-product-hero-grid {
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	gap: clamp(20px, 4vw, 48px);
+	align-items: end;
+}
+
+/* Centre column: Product Description / Product Posters vertical tab links */
+.bl-product-tabs-col {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	align-self: start;
+	padding-top: 16px;
+}
+.bl-product-tab-link {
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--bl-text-secondary);
+	padding: 8px 16px;
+	border-radius: 8px;
+	transition: all 0.2s;
+	white-space: nowrap;
+	letter-spacing: 0.04em;
+}
+.bl-product-tab-link:hover { color: var(--bl-green); background: var(--bl-green-light); }
+.bl-product-tab-link.active { color: var(--bl-green); background: var(--bl-green-light); border: 1px solid var(--bl-green-border); }
+
+/* Stats bar highlight for Product High Block */
+.bl-stat-highlight { position: relative; }
+.bl-stat-highlight::after {
+	content: "Product High Block";
+	display: block;
+	font-size: 8px;
+	font-weight: 700;
+	color: var(--bl-gold);
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	margin-top: 6px;
+}
+
+@media (max-width: 900px) {
+	.bl-product-hero-grid { grid-template-columns: 1fr; }
+	.bl-product-tabs-col { flex-direction: row; flex-wrap: wrap; order: -1; }
+}
+.bl-hero--ingredient { padding-bottom: clamp(36px, 6vw, 52px); }
+.bl-hero--subcat { padding-bottom: clamp(36px, 6vw, 52px); }
+
+/* ================================================================
+   BLOG HEADER — styled header for the blog index page
+   ================================================================ */
+.bl-blog-eyebrow { color: rgba(255,255,255,0.5); }
+.bl-blog-header .bl-archive-desc {
+	font-size: 15px !important;
+	opacity: 0.78;
+	max-width: 540px;
+	line-height: 1.65;
+}
+
+/* ================================================================
+   SUBCATEGORY PAGE — Feature cards for product collections
+   ================================================================ */
+.bl-subcat-page-section {
+	max-width: var(--bl-max);
+	margin: 0 auto;
+	padding: clamp(48px, 8vw, 72px) max(var(--bl-gutter), env(safe-area-inset-left, 0px)) 0;
+}
+.bl-subcat-showcase {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+.bl-subcat-feature-card {
+	display: flex;
+	background: #fff;
+	border-radius: 20px;
+	overflow: hidden;
+	border: 1px solid var(--bl-green-border);
+	transition: transform 0.3s, box-shadow 0.3s;
+}
+.bl-subcat-feature-card:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 16px 48px rgba(15,61,36,0.1);
+}
+.bl-subcat-feature-visual {
+	width: 280px;
+	min-height: 220px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+.bl-subcat-feature-icon { font-size: 4rem; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.2)); }
+.bl-subcat-feature-info {
+	padding: clamp(24px, 4vw, 36px) clamp(20px, 3vw, 32px);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.bl-subcat-feature-name {
+	font-family: "Cormorant Garamond", serif;
+	font-size: clamp(1.25rem, 2.5vw, 1.625rem);
+	font-weight: 700;
+	font-style: italic;
+	color: var(--bl-green);
+	margin-bottom: 10px;
+}
+.bl-subcat-feature-desc {
+	font-size: 14px;
+	color: #555;
+	line-height: 1.65;
+	margin-bottom: 14px;
+}
+.bl-subcat-feature-tags {
+	display: flex;
+	gap: 6px;
+	flex-wrap: wrap;
+	margin-bottom: 16px;
+}
+.bl-subcat-feature-btn {
+	display: inline-flex;
+	align-items: center;
+	font-size: 13px;
+	font-weight: 700;
+	color: var(--bl-green-mid);
+	transition: color 0.2s;
+}
+.bl-subcat-feature-btn:hover { color: var(--bl-green); }
+
+/* Subcategory description text (from dynamic block) */
+.bl-subcat-desc {
+	font-size: 12px;
+	color: #888;
+	margin-top: 4px;
+	line-height: 1.5;
+}
+
+/* Subcategories block wrapper — add page-level padding when outside archive */
+.bl-subcategories {
+	max-width: var(--bl-max);
+	margin: 0 auto;
+	padding: clamp(24px, 4vw, 40px) max(var(--bl-gutter), env(safe-area-inset-left, 0px));
+}
+
+@media (max-width: 900px) {
+	.bl-subcat-feature-card { flex-direction: column; }
+	.bl-subcat-feature-visual { width: 100%; min-height: 160px; }
+}
+
+/* ================================================================
+   PRODUCT DETAILS — POSTERS GRID
+   (also used in product-details.php pattern)
+   ================================================================ */
+.bl-product-desc-content { margin-bottom: 0; }
+
+/* ================================================================
+   ADDITIONAL 768px TABLET BREAKPOINT
+   Provides a closer match to the HTML reference (768px breakpoint)
+   for elements that benefit from a tighter tablet transition.
+   ================================================================ */
+@media (max-width: 768px) {
+	.bl-posters-grid { grid-template-columns: 1fr; }
+	.bl-safety-grid { grid-template-columns: 1fr; }
+	.bl-ing-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ================================================================
+   LIGHT LANDING PAGE — FONT OVERRIDES
+   Light color.html uses Playfair Display (serif headings)
+   and DM Sans (body text), not Cormorant Garamond + Jost.
+   These overrides ensure pixel-perfect match with the reference.
+   ================================================================ */
+.bll-hero,
+.bll-ps-section,
+.bll-how-section,
+.bll-ing-section,
+.bll-test-section {
+	font-family: "DM Sans", sans-serif;
+}
+
+.bll-headline,
+.bll-headline2,
+.bll-product-name,
+.bll-step-title,
+.bll-step-num,
+.bll-ps-header {
+	font-family: "Playfair Display", serif;
+}
+
+/* Override specific properties from Light color.html */
+.bll-hero { font-family: "DM Sans", sans-serif; }
+
+.bll-headline {
+	font-family: "Playfair Display", serif;
+	font-weight: 900;
+	letter-spacing: -0.03em;
+}
+.bll-headline2 {
+	font-family: "Playfair Display", serif;
+	font-weight: 900;
+	letter-spacing: -0.02em;
+}
+.bll-headline2 strong { color: var(--bl-green); }
+
+.bll-product-name {
+	font-family: "Playfair Display", serif;
+	font-weight: 900;
+	letter-spacing: -0.02em;
+}
+
+.bll-tag {
+	font-family: "DM Sans", sans-serif;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.bll-sub {
+	font-family: "DM Sans", sans-serif;
+	font-weight: 300;
+}
+
+.bll-btn-primary,
+.bll-btn-secondary {
+	font-family: "DM Sans", sans-serif;
+	font-weight: 600;
+}
+
+.bll-trust-badge {
+	font-family: "DM Sans", sans-serif;
+	font-weight: 500;
+}
+
+.bll-section-tag {
+	font-family: "DM Sans", sans-serif;
+	font-weight: 600;
+}
+
+.bll-body {
+	font-family: "DM Sans", sans-serif;
+}
+
+.bll-ps-header {
+	font-family: "Playfair Display", serif;
+	font-weight: 700;
+}
+
+.bll-ps-item {
+	font-family: "DM Sans", sans-serif;
+}
+
+.bll-step-num {
+	font-family: "Playfair Display", serif;
+	font-weight: 900;
+}
+
+.bll-step-title {
+	font-family: "Playfair Display", serif;
+	font-weight: 700;
+}
+
+.bll-step-body {
+	font-family: "DM Sans", sans-serif;
+}
+
+.bll-ing-name {
+	font-family: "DM Sans", sans-serif;
+	font-weight: 700;
+}
+
+.bll-ing-desc {
+	font-family: "DM Sans", sans-serif;
+}
+
+.bll-test-quote {
+	font-family: "DM Sans", sans-serif;
+}
+
+.bll-test-author {
+	font-family: "DM Sans", sans-serif;
+	font-weight: 600;
+}
+
+/* ================================================================
+   PER-PAGE COLOUR SCHEMES
+   Applied via body class: .bl-scheme-{name}
+   Selected in the WordPress page editor sidebar.
+   Overrides CSS variables so hero, nav-switcher, stats bar, CTA,
+   and accent colours change per page.
+   ================================================================ */
+
+/* Original™ — default forest green (already the base, no overrides needed) */
+
+/* Natural™ — leaf green tones */
+.bl-scheme-natural {
+	--bl-green: #1B4D2E;
+	--bl-green-deep: #133D22;
+	--bl-green-mid: #2D6A2D;
+	--bl-green-light: #E8F5E4;
+	--bl-green-border: #C0DEC0;
+	--bl-gold: #7BAE4E;
+}
+.bl-scheme-natural .bl-hero,
+.bl-scheme-natural .bl-hero--product {
+	background: linear-gradient(135deg, #133D22 0%, #1B4D2E 45%, #2D6A2D 100%);
+}
+.bl-scheme-natural .bl-stats-bar { background: #133D22; }
+.bl-scheme-natural .bl-cta-section { background: linear-gradient(135deg, #133D22 0%, #1B4D2E 50%, #2D6A2D 100%); }
+.bl-scheme-natural .bl-sw-btn.active-natural { background: #fff; color: #2D6A2D; }
+
+/* Hot Spot™ — teal tones */
+.bl-scheme-hotspot {
+	--bl-green: #0D4A52;
+	--bl-green-deep: #093A42;
+	--bl-green-mid: #1A7A8A;
+	--bl-green-light: #E4F5F7;
+	--bl-green-border: #B8DDE3;
+	--bl-gold: #E6A817;
+}
+.bl-scheme-hotspot .bl-hero,
+.bl-scheme-hotspot .bl-hero--product {
+	background: linear-gradient(135deg, #093A42 0%, #0D4A52 45%, #1A7A8A 100%);
+}
+.bl-scheme-hotspot .bl-stats-bar { background: #093A42; }
+.bl-scheme-hotspot .bl-cta-section { background: linear-gradient(135deg, #093A42 0%, #0D4A52 50%, #1A7A8A 100%); }
+.bl-scheme-hotspot .bl-sw-btn.active-hotspot { background: #fff; color: #0D4A52; }
+
+/* Light — cream/white scheme */
+.bl-scheme-light {
+	--bl-green: #1A5C38;
+	--bl-green-deep: #1C1C1C;
+	--bl-green-mid: #2E7D4F;
+	--bl-green-light: #E8F5ED;
+	--bl-green-border: rgba(46,125,79,0.15);
+	--bl-bg: #FAF8F3;
+}
+.bl-scheme-light .bl-hero {
+	background: linear-gradient(135deg, #FAF8F3 0%, #F4FAF6 100%);
+	color: #1C1C1C;
+}
+.bl-scheme-light .bl-hero-title { color: #1A5C38; }
+.bl-scheme-light .bl-hero-brand,
+.bl-scheme-light .bl-hero-subtitle,
+.bl-scheme-light .bl-hero-tagline,
+.bl-scheme-light .bl-hero-desc,
+.bl-scheme-light .bl-trust-row span,
+.bl-scheme-light .bl-breadcrumb { color: #6B7280; opacity: 1; }
+.bl-scheme-light .bl-stars { color: #C9A227; }
+.bl-scheme-light .bl-price { color: #1A5C38; }
+.bl-scheme-light .bl-add-btn { background: #1A5C38; color: #fff; }
+.bl-scheme-light .bl-add-btn:hover { background: #2E7D4F; }
+.bl-scheme-light .bl-qty-control { border-color: rgba(26,92,56,0.3); }
+.bl-scheme-light .bl-qty-btn { color: #1A5C38; }
+.bl-scheme-light .bl-qty-val { color: #1A5C38; }

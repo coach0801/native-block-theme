@@ -1,0 +1,51 @@
+<!-- wp:template-part {"slug":"header","theme":"boundless-native-theme","tagName":"header"} /-->
+
+<!-- wp:group {"className":"bl-single-wrap"} -->
+<div class="wp-block-group bl-single-wrap">
+  <!-- wp:group {"layout":{"type":"constrained","contentSize":"760px"},"className":"bl-single-article"} -->
+  <div class="wp-block-group bl-single-article">
+    <!-- wp:post-title {"level":1,"className":"bl-single-title"} /-->
+    <!-- wp:group {"className":"bl-single-meta","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"left"}} -->
+    <div class="wp-block-group bl-single-meta">
+      <!-- wp:post-date {"className":"bl-meta-date"} /-->
+      <!-- wp:post-author {"showAvatar":false,"className":"bl-meta-author"} /-->
+      <!-- wp:post-terms {"term":"category","className":"bl-meta-cats"} /-->
+    </div>
+    <!-- /wp:group -->
+    <!-- wp:post-featured-image {"className":"bl-single-thumb","style":{"border":{"radius":"16px"}}} /-->
+    <!-- wp:post-content {"className":"bl-single-content"} /-->
+    <!-- wp:group {"className":"bl-single-tags","layout":{"type":"flex","flexWrap":"wrap"}} -->
+    <div class="wp-block-group bl-single-tags">
+      <!-- wp:post-terms {"term":"post_tag"} /-->
+    </div>
+    <!-- /wp:group -->
+  </div>
+  <!-- /wp:group -->
+
+  <!-- wp:separator {"className":"bl-single-divider"} -->
+  <hr class="wp-block-separator bl-single-divider"/>
+  <!-- /wp:separator -->
+
+  <!-- wp:group {"layout":{"type":"constrained","contentSize":"760px"},"className":"bl-related-posts-wrap"} -->
+  <div class="wp-block-group bl-related-posts-wrap">
+    <!-- wp:heading {"level":3,"className":"bl-related-title"} -->
+    <h3 class="wp-block-heading bl-related-title">More from the blog</h3>
+    <!-- /wp:heading -->
+    <!-- wp:query {"queryId":20,"query":{"perPage":3,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","inherit":false},"className":"bl-posts-query"} -->
+    <div class="wp-block-query bl-posts-query">
+      <!-- wp:post-template {"layout":{"type":"grid","columnCount":3}} -->
+      <!-- wp:group {"className":"bl-post-card"} -->
+      <div class="wp-block-group bl-post-card">
+        <!-- wp:post-title {"isLink":true,"level":4} /-->
+        <!-- wp:post-excerpt {"moreText":"Read more →","excerptLength":18} /-->
+      </div>
+      <!-- /wp:group -->
+      <!-- /wp:post-template -->
+    </div>
+    <!-- /wp:query -->
+  </div>
+  <!-- /wp:group -->
+</div>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","theme":"boundless-native-theme","tagName":"footer"} /-->

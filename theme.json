@@ -1,0 +1,118 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "settings": {
+    "appearanceTools": true,
+    "layout": {
+      "contentSize": "1100px",
+      "wideSize": "1280px"
+    },
+    "color": {
+      "palette": [
+        { "slug": "boundless-dark", "name": "Primary Green", "color": "#1A5C38" },
+        { "slug": "boundless-mid", "name": "Mid Green", "color": "#2E7D4F" },
+        { "slug": "boundless-light", "name": "Light Green", "color": "#E8F5ED" },
+        { "slug": "boundless-gold", "name": "Accent Orange", "color": "#C45C00" },
+        { "slug": "boundless-bg", "name": "Background Cream", "color": "#FAF8F3" },
+        { "slug": "boundless-white", "name": "White", "color": "#FFFFFF" }
+      ]
+    },
+    "typography": {
+      "fontFamilies": [
+        {
+          "fontFamily": "\"Jost\", sans-serif",
+          "name": "Jost",
+          "slug": "jost"
+        },
+        {
+          "fontFamily": "\"Cormorant Garamond\", serif",
+          "name": "Cormorant Garamond",
+          "slug": "cormorant"
+        },
+        {
+          "fontFamily": "\"Playfair Display\", serif",
+          "name": "Playfair Display",
+          "slug": "playfair"
+        },
+        {
+          "fontFamily": "\"DM Sans\", sans-serif",
+          "name": "DM Sans",
+          "slug": "dm-sans"
+        }
+      ]
+    }
+  },
+  "styles": {
+    "color": {
+      "background": "#FAF8F3",
+      "text": "#1C1C1C"
+    },
+    "typography": {
+      "fontFamily": "var(--wp--preset--font-family--jost)"
+    },
+    "spacing": {
+      "blockGap": "1.25em"
+    },
+    "elements": {
+      "heading": {
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--cormorant)"
+        }
+      },
+      "link": {
+        "color": {
+          "text": "inherit"
+        },
+        "typography": {
+          "textDecoration": "none"
+        }
+      }
+    }
+  },
+  "templateParts": [
+    { "name": "header", "title": "Header", "area": "header" },
+    { "name": "footer", "title": "Footer", "area": "footer" }
+  ],
+  "customTemplates": [
+    {
+      "name": "front-page",
+      "title": "Homepage",
+      "postTypes": ["page"]
+    },
+    {
+      "name": "page-checkout",
+      "title": "Checkout Page",
+      "postTypes": ["page"]
+    },
+    {
+      "name": "page-light",
+      "title": "Light Landing Page",
+      "postTypes": ["page"]
+    },
+    {
+      "name": "page-product",
+      "title": "Product Details Page",
+      "postTypes": ["page"]
+    },
+    {
+      "name": "page-ingredient",
+      "title": "Ingredient Page",
+      "postTypes": ["page"]
+    },
+    {
+      "name": "page-contact",
+      "title": "Contact Page",
+      "postTypes": ["page"]
+    },
+    {
+      "name": "page-cart",
+      "title": "Cart Page",
+      "postTypes": ["page"]
+    },
+    {
+      "name": "page-subcategory",
+      "title": "Subcategory Page",
+      "postTypes": ["page"]
+    }
+  ]
+}
