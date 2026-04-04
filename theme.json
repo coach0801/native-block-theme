@@ -118,6 +118,11 @@
       "name": "page-collection",
       "title": "Product Collection Page",
       "postTypes": ["page"]
+    },
+    {
+      "name": "page-top-category",
+      "title": "Top Category Page",
+      "postTypes": ["page"]
     }
   ]
 }

@@ -328,6 +328,11 @@ function boundless_create_pages_on_activation() {
 			'slug'     => 'light',
 			'template' => 'page-light',
 		),
+		/* Top category landing pages */
+		array('title' => 'Grooming',                     'slug' => 'grooming',               'template' => 'page-top-category'),
+		array('title' => 'Behavior',                     'slug' => 'behavior',               'template' => 'page-top-category'),
+		array('title' => 'Flea & Tick Spray',            'slug' => 'flea-tick',              'template' => 'page-top-category'),
+		array('title' => 'Dental',                       'slug' => 'dental',                 'template' => 'page-top-category'),
 		/* Grooming subcategory pages */
 		array('title' => 'Shampoo',                     'slug' => 'shampoo',                'template' => 'page-subcategory'),
 		array('title' => 'Conditioner',                  'slug' => 'conditioner',            'template' => 'page-subcategory'),

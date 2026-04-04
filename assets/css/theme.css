@@ -338,6 +338,16 @@ header.wp-block-template-part,
 	margin-top: 2px !important;
 	letter-spacing: 0 !important;
 }
+#site-nav .bl-sub-link--all {
+	font-weight: 700 !important;
+	color: var(--bl-green) !important;
+	border-bottom: 1px solid var(--bl-green-border) !important;
+}
+.bl-main-nav.is-open .bl-sub-link--all {
+	font-weight: 700;
+	color: var(--bl-green);
+	border-bottom: 1px solid #C8E4D0;
+}
 
 /* ── Mobile hamburger toggle ── */
 #site-nav .bl-nav-toggle {
