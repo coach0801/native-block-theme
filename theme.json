@@ -113,6 +113,11 @@
       "name": "page-subcategory",
       "title": "Subcategory Page",
       "postTypes": ["page"]
+    },
+    {
+      "name": "page-collection",
+      "title": "Product Collection Page",
+      "postTypes": ["page"]
     }
   ]
 }

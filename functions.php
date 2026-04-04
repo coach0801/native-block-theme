@@ -332,7 +332,7 @@ function boundless_create_pages_on_activation() {
 		array('title' => 'Shampoo',                     'slug' => 'shampoo',                'template' => 'page-subcategory'),
 		array('title' => 'Conditioner',                  'slug' => 'conditioner',            'template' => 'page-subcategory'),
 		array('title' => 'Detangler Spray',              'slug' => 'detangler-spray',        'template' => 'page-subcategory'),
-		array('title' => 'Deodorant & Cologne Spray',    'slug' => 'deodorant-cologne-spray','template' => 'page-subcategory'),
+		array('title' => 'Deodorant & Cologne Spray',    'slug' => 'deodorant-cologne-spray','template' => 'page-collection'),
 		array('title' => 'Waterless Shampoo',            'slug' => 'waterless-shampoo',      'template' => 'page-subcategory'),
 		/* Behavior subcategory pages */
 		array('title' => 'Training Aid for Dogs',        'slug' => 'training-aid-dogs',      'template' => 'page-subcategory'),
