@@ -119,40 +119,6 @@ $dental_products = array(
 ?>
 
 <!-- wp:html -->
-<style>
-/* ── DENTAL COLLECTION — GRID OVERRIDE ─────────────────────────────────── */
-.bl-dental-grid {
-  grid-template-columns: repeat(4, 1fr);
-}
-
-@media (max-width: 900px) {
-  .bl-dental-grid { grid-template-columns: repeat(3, 1fr); }
-}
-@media (max-width: 600px) {
-  .bl-dental-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 400px) {
-  .bl-dental-grid { grid-template-columns: 1fr; }
-}
-
-/* ── DENTAL PRODUCT TYPE LABEL ─────────────────────────────────────────── */
-.bl-product-card-type {
-  font-size: 10px; font-weight: 500; letter-spacing: 0.10em;
-  text-transform: uppercase; color: var(--bl-muted);
-  margin-bottom: 6px;
-}
-
-/* ── DENTAL RATING ─────────────────────────────────────────────────────── */
-.bl-product-card-rating {
-  font-size: 12px; color: var(--bl-muted); font-weight: 400;
-  margin-bottom: 14px;
-  display: flex; align-items: center; gap: 4px;
-}
-
-.bl-product-card-rating-star {
-  color: #F5A623;
-}
-</style>
 
 <!-- HERO -->
 <section class="bl-collection-hero">

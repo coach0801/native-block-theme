@@ -45,46 +45,6 @@ $shampoos = array(
 ?>
 
 <!-- wp:html -->
-<style>
-/* ── SHAMPOO COLLECTION — SCOPED OVERRIDES ─────────────────────────────── */
-/* Re-uses all .bl-collection-* and .bl-product-card classes from cologne-collection.
-   Only the grid layout override and shampoo-specific additions live here. */
-
-.bl-shampoo-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  padding: 0 40px 80px;
-}
-
-.bl-product-card-badge {
-  position: absolute; top: 14px; left: 14px;
-  font-size: 10px; font-weight: 600; letter-spacing: 0.14em;
-  text-transform: uppercase;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(8px);
-  padding: 4px 12px; border-radius: 100px;
-  z-index: 2;
-}
-
-.bl-product-card-rating {
-  display: flex; align-items: center; gap: 4px;
-  font-size: 12px; color: var(--bl-muted);
-  margin-bottom: 14px;
-}
-
-.bl-product-card-rating strong {
-  color: var(--bl-ink); font-weight: 600;
-}
-
-@media (max-width: 600px) {
-  .bl-shampoo-grid { grid-template-columns: repeat(2, 1fr); padding: 0 20px 60px; gap: 16px; }
-}
-
-@media (max-width: 400px) {
-  .bl-shampoo-grid { grid-template-columns: 1fr; }
-}
-</style>
 
 <!-- HERO -->
 <section class="bl-collection-hero">
