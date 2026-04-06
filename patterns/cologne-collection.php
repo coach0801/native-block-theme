@@ -296,7 +296,7 @@ $colognes = array(
         <div class="bl-product-card-price-sub">250 ml &middot; Free shipping $50+</div>
       </div>
       <span class="bl-product-card-btn" style="background:<?php echo esc_attr( $c['accent'] ); ?>">
-        Add to Cart
+        View Details
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </span>
     </div>

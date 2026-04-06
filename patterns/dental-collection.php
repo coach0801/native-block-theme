@@ -155,7 +155,7 @@ $dental_products = array(
 <!-- PRODUCT GRID -->
 <div class="bl-collection-grid bl-dental-grid">
   <?php foreach ( $dental_products as $d ) : ?>
-  <a href="/breath-spray/#<?php echo esc_attr( sanitize_title( $d['name'] ) ); ?>" class="bl-product-card" style="--band-gradient:<?php echo $d['gradient']; ?>;text-decoration:none;color:inherit;">
+  <a href="/dental/" class="bl-product-card" style="--band-gradient:<?php echo $d['gradient']; ?>;text-decoration:none;color:inherit;">
 
     <!-- Band -->
     <div class="bl-product-card-band">
@@ -194,7 +194,7 @@ $dental_products = array(
         <div class="bl-product-card-price-sub"><?php echo esc_html( $d['size'] ); ?> &middot; Free shipping $50+</div>
       </div>
       <span class="bl-product-card-btn" style="background:<?php echo esc_attr( $d['accent'] ); ?>">
-        Add to Cart
+        View Details
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </span>
     </div>
