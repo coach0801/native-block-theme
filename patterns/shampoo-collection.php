@@ -124,10 +124,10 @@ $shampoos = array(
         <div class="bl-product-card-price"><?php echo esc_html( $s['price'] ); ?></div>
         <div class="bl-product-card-price-sub"><?php echo esc_html( $s['size'] ); ?> &middot; Free shipping $50+</div>
       </div>
-      <button class="bl-product-card-btn" style="background:<?php echo esc_attr( $s['accent'] ); ?>">
-        Add to Cart
+      <span class="bl-product-card-btn" style="background:<?php echo esc_attr( $s['accent'] ); ?>">
+        View Details
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
+      </span>
     </div>
   </a>
   <?php endforeach; ?>
