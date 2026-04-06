@@ -2966,18 +2966,7 @@ footer {
   .bl-collection-highlight { padding: 14px 20px; gap: 20px; }
 }
 
-/* Shampoo collection overrides */
-/* ── SHAMPOO COLLECTION — SCOPED OVERRIDES ─────────────────────────────── */
-/* Re-uses all .bl-collection-* and .bl-product-card classes from cologne-collection.
-   Only the grid layout override and shampoo-specific additions live here. */
-
-.bl-shampoo-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  padding: 0 40px 80px;
-}
-
+/* ── EXTRA CARD ELEMENTS (badge, rating, type) ─────────────────────────── */
 .bl-product-card-badge {
   position: absolute; top: 14px; left: 14px;
   font-size: 10px; font-weight: 600; letter-spacing: 0.14em;
@@ -2987,39 +2976,13 @@ footer {
   padding: 4px 12px; border-radius: 100px;
   z-index: 2;
 }
-
 .bl-product-card-rating {
   display: flex; align-items: center; gap: 4px;
   font-size: 12px; color: var(--bl-muted);
   margin-bottom: 14px;
 }
-
 .bl-product-card-rating strong {
   color: var(--bl-ink); font-weight: 600;
-}
-
-@media (max-width: 600px) {
-  .bl-shampoo-grid { grid-template-columns: repeat(2, 1fr); padding: 0 20px 60px; gap: 16px; }
-}
-
-@media (max-width: 400px) {
-  .bl-shampoo-grid { grid-template-columns: 1fr; }
-}
-
-/* Dental collection overrides */
-/* ── DENTAL COLLECTION — GRID OVERRIDE ─────────────────────────────────── */
-.bl-dental-grid {
-  grid-template-columns: repeat(4, 1fr);
-}
-
-@media (max-width: 900px) {
-  .bl-dental-grid { grid-template-columns: repeat(3, 1fr); }
-}
-@media (max-width: 600px) {
-  .bl-dental-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 400px) {
-  .bl-dental-grid { grid-template-columns: 1fr; }
 }
 
 /* ── DENTAL PRODUCT TYPE LABEL ─────────────────────────────────────────── */

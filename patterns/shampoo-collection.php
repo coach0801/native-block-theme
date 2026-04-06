@@ -79,7 +79,7 @@ $shampoos = array(
 </div>
 
 <!-- PRODUCT GRID -->
-<div class="bl-shampoo-grid">
+<div class="bl-collection-grid">
   <?php foreach ( $shampoos as $s ) : ?>
   <div class="bl-product-card"
        style="--band-gradient:<?php echo esc_attr( $s['gradient'] ); ?>">
