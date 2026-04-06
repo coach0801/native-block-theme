@@ -334,7 +334,7 @@ function boundless_create_pages_on_activation() {
 		array('title' => 'Flea & Tick Spray',            'slug' => 'flea-tick',              'template' => 'page-top-category'),
 		array('title' => 'Dental',                       'slug' => 'dental',                 'template' => 'page-top-category'),
 		/* Grooming subcategory pages */
-		array('title' => 'Shampoo',                     'slug' => 'shampoo',                'template' => 'page-subcategory'),
+		array('title' => 'Shampoo',                     'slug' => 'shampoo',                'template' => 'page-shampoo-collection'),
 		array('title' => 'Conditioner',                  'slug' => 'conditioner',            'template' => 'page-subcategory'),
 		array('title' => 'Detangler Spray',              'slug' => 'detangler-spray',        'template' => 'page-subcategory'),
 		array('title' => 'Deodorant & Cologne Spray',    'slug' => 'deodorant-cologne-spray','template' => 'page-collection'),
@@ -346,7 +346,7 @@ function boundless_create_pages_on_activation() {
 		array('title' => 'Flea & Tick Spray For Home',   'slug' => 'flea-tick-home',         'template' => 'page-subcategory'),
 		array('title' => 'Flea & Tick Garden and Yard Spray', 'slug' => 'flea-tick-garden',  'template' => 'page-subcategory'),
 		/* Dental subcategory pages */
-		array('title' => 'Breath Spray',                 'slug' => 'breath-spray',           'template' => 'page-subcategory'),
+		array('title' => 'Breath Spray',                 'slug' => 'breath-spray',           'template' => 'page-dental-collection'),
 		array('title' => 'Water Additive',               'slug' => 'water-additive',         'template' => 'page-subcategory'),
 		/* Other pages */
 		array('title' => 'Affiliate',                    'slug' => 'affiliate',              'template' => ''),

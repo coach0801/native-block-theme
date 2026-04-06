@@ -123,6 +123,16 @@
       "name": "page-top-category",
       "title": "Top Category Page",
       "postTypes": ["page"]
+    },
+    {
+      "name": "page-shampoo-collection",
+      "title": "Shampoo Collection",
+      "postTypes": ["page"]
+    },
+    {
+      "name": "page-dental-collection",
+      "title": "Dental Collection",
+      "postTypes": ["page"]
     }
   ]
 }
