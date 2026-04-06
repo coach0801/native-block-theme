@@ -2767,6 +2767,8 @@ footer {
   box-shadow: 0 2px 12px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.04);
   transition: transform var(--bl-transition), box-shadow var(--bl-transition);
   cursor: pointer;
+  text-decoration: none;
+  color: inherit;
   display: flex; flex-direction: column;
 }
 

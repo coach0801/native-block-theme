@@ -8,7 +8,7 @@
 
 $colognes = array(
 	array(
-		'sku'         => 'SKU-001',
+		'sku' => 'SKU-001', 'slug' => '/deodorant-cologne-spray/#citrus-whisper',
 		'name'        => 'Citrus Whisper',
 		'icon'        => "\xF0\x9F\x8D\x8B",
 		'tagline'     => 'A sun-drenched grove, softly exhaled',
@@ -22,7 +22,7 @@ $colognes = array(
 		'accent_dark' => '#A87A1A',
 	),
 	array(
-		'sku'         => 'SKU-002',
+		'sku' => 'SKU-002', 'slug' => '/deodorant-cologne-spray/#peach-glow',
 		'name'        => 'Peach Glow',
 		'icon'        => "\xF0\x9F\x8D\x91",
 		'tagline'     => 'Velvet skin, golden afternoon',
@@ -36,7 +36,7 @@ $colognes = array(
 		'accent_dark' => '#B05A28',
 	),
 	array(
-		'sku'         => 'SKU-003',
+		'sku' => 'SKU-003', 'slug' => '/deodorant-cologne-spray/#rose-mirage',
 		'name'        => 'Rose Mirage',
 		'icon'        => "\xF0\x9F\x8C\xB9",
 		'tagline'     => 'The idea of a rose, not its weight',
@@ -50,7 +50,7 @@ $colognes = array(
 		'accent_dark' => '#A0404F',
 	),
 	array(
-		'sku'         => 'SKU-004',
+		'sku' => 'SKU-004', 'slug' => '/deodorant-cologne-spray/#lime-veil',
 		'name'        => 'Lime Veil',
 		'icon'        => "\xF0\x9F\x8D\x88",
 		'tagline'     => 'Crisp green air, freshly cut',
@@ -64,7 +64,7 @@ $colognes = array(
 		'accent_dark' => '#1A6640',
 	),
 	array(
-		'sku'         => 'SKU-005',
+		'sku' => 'SKU-005', 'slug' => '/deodorant-cologne-spray/#morning-tea',
 		'name'        => 'Morning Tea',
 		'icon'        => "\xF0\x9F\x8D\xB5",
 		'tagline'     => 'Quiet warmth in a quiet room',
@@ -78,7 +78,7 @@ $colognes = array(
 		'accent_dark' => '#6B4A30',
 	),
 	array(
-		'sku'         => 'SKU-006',
+		'sku' => 'SKU-006', 'slug' => '/deodorant-cologne-spray/#lily-dew',
 		'name'        => 'Lily Dew',
 		'icon'        => "\xF0\x9F\x8C\xB7",
 		'tagline'     => 'Petals before the sun arrives',
@@ -92,7 +92,7 @@ $colognes = array(
 		'accent_dark' => '#2E6E9E',
 	),
 	array(
-		'sku'         => 'SKU-007',
+		'sku' => 'SKU-007', 'slug' => '/deodorant-cologne-spray/#grapefruit-muse',
 		'name'        => 'Grapefruit Muse',
 		'icon'        => "\xF0\x9F\x8D\x8A",
 		'tagline'     => 'Bold, bright, unapologetically alive',
@@ -106,7 +106,7 @@ $colognes = array(
 		'accent_dark' => '#BF360C',
 	),
 	array(
-		'sku'         => 'SKU-008',
+		'sku' => 'SKU-008', 'slug' => '/deodorant-cologne-spray/#sweet-petal',
 		'name'        => 'Sweet Petal',
 		'icon'        => "\xF0\x9F\x8C\xB8",
 		'tagline'     => 'Softness, distilled',
@@ -120,7 +120,7 @@ $colognes = array(
 		'accent_dark' => '#9E2E54',
 	),
 	array(
-		'sku'         => 'SKU-009',
+		'sku' => 'SKU-009', 'slug' => '/deodorant-cologne-spray/#bergamot-breeze',
 		'name'        => 'Bergamot Breeze',
 		'icon'        => "\xF0\x9F\xAB\xA7",
 		'tagline'     => 'The freshest thing you will smell today',
@@ -134,7 +134,7 @@ $colognes = array(
 		'accent_dark' => '#006064',
 	),
 	array(
-		'sku'         => 'SKU-010',
+		'sku' => 'SKU-010', 'slug' => '/deodorant-cologne-spray/#freesia-mist',
 		'name'        => 'Freesia Mist',
 		'icon'        => "\xF0\x9F\x92\x9C",
 		'tagline'     => 'A spring field, remembered',
@@ -148,7 +148,7 @@ $colognes = array(
 		'accent_dark' => '#5E3BA4',
 	),
 	array(
-		'sku'         => 'SKU-011',
+		'sku' => 'SKU-011', 'slug' => '/deodorant-cologne-spray/#berry-kiss',
 		'name'        => 'Berry Kiss',
 		'icon'        => "\xF0\x9F\xAB\x90",
 		'tagline'     => 'Rich, lush, unexpectedly refined',
@@ -162,7 +162,7 @@ $colognes = array(
 		'accent_dark' => '#6A1B9A',
 	),
 	array(
-		'sku'         => 'SKU-012',
+		'sku' => 'SKU-012', 'slug' => '/deodorant-cologne-spray/#candy-cloud',
 		'name'        => 'Candy Cloud',
 		'icon'        => "\xF0\x9F\x8D\xAC",
 		'tagline'     => 'Pure joy, absolutely weightless',
@@ -176,7 +176,7 @@ $colognes = array(
 		'accent_dark' => '#C2185B',
 	),
 	array(
-		'sku'         => 'SKU-013',
+		'sku' => 'SKU-013', 'slug' => '/deodorant-cologne-spray/#lavender-bliss',
 		'name'        => 'Lavender Bliss',
 		'icon'        => "\xF0\x9F\x92\x90",
 		'tagline'     => 'Stillness you can wear',
@@ -190,7 +190,7 @@ $colognes = array(
 		'accent_dark' => '#512DA8',
 	),
 	array(
-		'sku'         => 'SKU-014',
+		'sku' => 'SKU-014', 'slug' => '/deodorant-cologne-spray/#sunny-daisy',
 		'name'        => 'Sunny Daisy',
 		'icon'        => "\xF0\x9F\x8C\xBC",
 		'tagline'     => 'Happiness has a scent',
@@ -204,7 +204,7 @@ $colognes = array(
 		'accent_dark' => '#F57F17',
 	),
 	array(
-		'sku'         => 'SKU-015',
+		'sku' => 'SKU-015', 'slug' => '/deodorant-cologne-spray/#bubble-gum',
 		'name'        => 'Bubble Gum',
 		'icon'        => "\xF0\x9F\x8E\x80",
 		'tagline'     => 'Blissfully, unapologetically sweet',
@@ -218,7 +218,7 @@ $colognes = array(
 		'accent_dark' => '#C2185B',
 	),
 	array(
-		'sku'         => 'SKU-016',
+		'sku' => 'SKU-016', 'slug' => '/deodorant-cologne-spray/#baby-powder',
 		'name'        => 'Baby Powder',
 		'icon'        => "\xE2\x98\x81\xEF\xB8\x8F",
 		'tagline'     => 'Soft as a first breath',
@@ -250,7 +250,7 @@ $colognes = array(
     <span class="bl-collection-pill">No Parabens</span>
     <span class="bl-collection-pill">No Sulfates</span>
     <span class="bl-collection-pill">250 ml</span>
-  </div>
+  </a>
 </section>
 
 <!-- HIGHLIGHT STRIP -->
@@ -272,47 +272,35 @@ $colognes = array(
 <!-- PRODUCT GRID -->
 <div class="bl-collection-grid">
   <?php foreach ( $colognes as $c ) : ?>
-  <div class="bl-product-card"
-       style="--band-gradient:<?php echo esc_attr( $c['gradient'] ); ?>">
-
-    <!-- Band -->
+  <a href="<?php echo esc_attr( $c['slug'] ); ?>" class="bl-product-card" style="--band-gradient:<?php echo esc_attr( $c['gradient'] ); ?>;text-decoration:none;color:inherit;">
     <div class="bl-product-card-band">
       <span class="bl-product-card-sku"><?php echo esc_html( $c['sku'] ); ?></span>
       <span class="bl-product-card-dog">&#128054;</span>
       <span class="bl-product-card-icon"><?php echo $c['icon']; ?></span>
     </div>
-
-    <!-- Body -->
     <div class="bl-product-card-body">
       <div class="bl-product-card-name"><?php echo esc_html( $c['name'] ); ?></div>
       <div class="bl-product-card-tagline"><?php echo esc_html( $c['tagline'] ); ?></div>
-
       <div class="bl-product-card-notes">
         <?php foreach ( $c['notes'] as $note ) : ?>
-        <span class="bl-product-card-chip"
-              style="background:<?php echo esc_attr( $c['chip_bg'] ); ?>;color:<?php echo esc_attr( $c['chip_color'] ); ?>;border-color:<?php echo esc_attr( $c['chip_border'] ); ?>"><?php echo esc_html( $note ); ?></span>
+        <span class="bl-product-card-chip" style="background:<?php echo esc_attr( $c['chip_bg'] ); ?>;color:<?php echo esc_attr( $c['chip_color'] ); ?>;border-color:<?php echo esc_attr( $c['chip_border'] ); ?>"><?php echo esc_html( $note ); ?></span>
         <?php endforeach; ?>
       </div>
-
       <p class="bl-product-card-desc"><?php echo esc_html( $c['desc'] ); ?></p>
     </div>
-
-    <!-- Divider -->
     <div class="bl-product-card-divider"></div>
-
-    <!-- Footer -->
     <div class="bl-product-card-footer">
       <div>
         <div class="bl-product-card-price-label">Price</div>
         <div class="bl-product-card-price">$24.00</div>
         <div class="bl-product-card-price-sub">250 ml &middot; Free shipping $50+</div>
       </div>
-      <button class="bl-product-card-btn" style="background:<?php echo esc_attr( $c['accent'] ); ?>">
+      <span class="bl-product-card-btn" style="background:<?php echo esc_attr( $c['accent'] ); ?>">
         Add to Cart
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
+      </span>
     </div>
-  </div>
+  </a>
   <?php endforeach; ?>
 </div>
 <!-- /wp:html -->

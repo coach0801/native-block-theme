@@ -9,6 +9,7 @@
 $shampoos = array(
 	array(
 		'name'        => 'Sensitive',
+		'slug'        => '/sensitive/',
 		'icon'        => "\xF0\x9F\x8C\xBE",
 		'badge'       => 'SENSITIVE',
 		'tagline'     => 'Pure. Nothing Extra.',
@@ -26,6 +27,7 @@ $shampoos = array(
 	),
 	array(
 		'name'        => 'Itch Relief',
+		'slug'        => '/itch-relief/',
 		'icon'        => "\xF0\x9F\xA7\xAA",
 		'badge'       => 'ITCH RELIEF',
 		'tagline'     => 'Relief, Rooted in Nature.',
@@ -81,8 +83,8 @@ $shampoos = array(
 <!-- PRODUCT GRID -->
 <div class="bl-collection-grid">
   <?php foreach ( $shampoos as $s ) : ?>
-  <div class="bl-product-card"
-       style="--band-gradient:<?php echo esc_attr( $s['gradient'] ); ?>">
+  <a href="<?php echo esc_attr( $s['slug'] ); ?>" class="bl-product-card"
+     style="--band-gradient:<?php echo esc_attr( $s['gradient'] ); ?>;text-decoration:none;color:inherit;">
 
     <!-- Band -->
     <div class="bl-product-card-band">
@@ -127,7 +129,7 @@ $shampoos = array(
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </button>
     </div>
-  </div>
+  </a>
   <?php endforeach; ?>
 </div>
 <!-- /wp:html -->
