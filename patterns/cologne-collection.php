@@ -239,7 +239,7 @@ $colognes = array(
 <!-- HERO -->
 <section class="bl-collection-hero">
   <nav class="bl-collection-breadcrumb" aria-label="Breadcrumb">
-    <a href="/">Home</a> &nbsp;/&nbsp; <a href="/shop">Shop</a> &nbsp;/&nbsp; Cologne Collection
+    <a href="/">Home</a> &nbsp;/&nbsp; <a href="/grooming">Grooming</a> &nbsp;/&nbsp; Cologne
   </nav>
   <div class="bl-collection-brand-tag"><span>&#128062;</span> Dog Use Only &middot; Leave-On Formula</div>
   <h1>The Scent<br><em>Collection</em></h1>

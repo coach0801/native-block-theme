@@ -123,7 +123,7 @@ $dental_products = array(
 <!-- HERO -->
 <section class="bl-collection-hero">
   <nav class="bl-collection-breadcrumb" aria-label="Breadcrumb">
-    <a href="/">Home</a> &nbsp;/&nbsp; <a href="/shop">RedyPet</a> &nbsp;/&nbsp; Dental
+    <a href="/">Home</a> &nbsp;/&nbsp; <a href="/dental">Dental</a> &nbsp;/&nbsp; Breath Spray
   </nav>
   <div class="bl-collection-brand-tag"><span>&#129441;</span> Dogs &amp; Cats &middot; Oral Care</div>
   <h1>Dental<br><em>Care</em></h1>

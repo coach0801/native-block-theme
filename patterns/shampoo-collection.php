@@ -51,7 +51,7 @@ $shampoos = array(
 <!-- HERO -->
 <section class="bl-collection-hero">
   <nav class="bl-collection-breadcrumb" aria-label="Breadcrumb">
-    <a href="/">RedyPet</a> &nbsp;/&nbsp; <a href="/grooming">Grooming</a> &nbsp;/&nbsp; Shampoo
+    <a href="/">Home</a> &nbsp;/&nbsp; <a href="/grooming">Grooming</a> &nbsp;/&nbsp; Shampoo
   </nav>
   <div class="bl-collection-brand-tag"><span>&#128054;</span> Dog Use Only &middot; Rinse-Off Formula</div>
   <h1>Dog<br><em>Shampoo</em></h1>
