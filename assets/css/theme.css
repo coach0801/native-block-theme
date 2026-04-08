@@ -2282,9 +2282,9 @@ footer {
 .bl-hero--product { padding-bottom: 0; }
 .bl-product-hero-grid {
 	display: grid;
-	grid-template-columns: 1fr auto 1fr;
+	grid-template-columns: 1fr 1fr;
 	gap: clamp(20px, 4vw, 48px);
-	align-items: end;
+	align-items: center;
 }
 
 /* Centre column: Product Description / Product Posters vertical tab links */
@@ -2323,7 +2323,11 @@ footer {
 
 @media (max-width: 900px) {
 	.bl-product-hero-grid { grid-template-columns: 1fr; }
-	.bl-product-tabs-col { flex-direction: row; flex-wrap: wrap; order: -1; }
+	.bl-bottle-wrap { order: -1; margin-bottom: 20px; }
+	.bl-product-image img { max-height: 300px; }
+}
+@media (max-width: 480px) {
+	.bl-product-image img { max-height: 220px; }
 }
 .bl-hero--ingredient { padding-bottom: clamp(36px, 6vw, 52px); }
 .bl-hero--subcat { padding-bottom: clamp(36px, 6vw, 52px); }
@@ -3028,11 +3032,11 @@ footer {
   position: relative;
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
 }
 .bl-product-image img {
-  max-width: 280px;
-  max-height: 400px;
+  max-width: 100%;
+  max-height: 450px;
   width: auto;
   height: auto;
   object-fit: contain;
@@ -3041,7 +3045,7 @@ footer {
 .bl-product-image .bl-bottle-badge {
   position: absolute;
   top: 20px;
-  right: 0;
+  right: 20px;
 }
 
 /* Homepage — Shop by Category grid */

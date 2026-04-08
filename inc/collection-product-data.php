@@ -5,7 +5,8 @@ return array(
 
     // ─── CITRUS WHISPER ─────────────────────────────────────────
     'citrus-whisper' => array(
-        'id'            => 'citruswhisper',
+        'id' => 'citruswhisper',
+        'image' => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-front.png',
         'name'          => 'Citrus Whisper',
         'subtitle'      => 'Deodorizing &amp; Conditioning Spray &middot; Citrus Whisper',
         'tagline'       => 'A sun-drenched grove, softly exhaled.',
@@ -82,7 +83,8 @@ return array(
 
     // ─── PEACH GLOW ─────────────────────────────────────────────
     'peach-glow' => array(
-        'id'            => 'peachglow',
+        'id' => 'peachglow',
+        'image' => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-front.png',
         'name'          => 'Peach Glow',
         'subtitle'      => 'Deodorizing &amp; Conditioning Spray &middot; Peach Glow',
         'tagline'       => 'Velvet skin, golden afternoon.',
@@ -159,7 +161,8 @@ return array(
 
     // ─── ROSE MIRAGE ────────────────────────────────────────────
     'rose-mirage' => array(
-        'id'            => 'rosemirage',
+        'id' => 'rosemirage',
+        'image' => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-front.png',
         'name'          => 'Rose Mirage',
         'subtitle'      => 'Deodorizing &amp; Conditioning Spray &middot; Rose Mirage',
         'tagline'       => 'The idea of a rose, not its weight.',
@@ -236,7 +239,8 @@ return array(
 
     // ─── LIME VEIL ──────────────────────────────────────────────
     'lime-veil' => array(
-        'id'            => 'limeveil',
+        'id' => 'limeveil',
+        'image' => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-front.png',
         'name'          => 'Lime Veil',
         'subtitle'      => 'Deodorizing &amp; Conditioning Spray &middot; Lime Veil',
         'tagline'       => 'Crisp green air, freshly cut.',
@@ -313,7 +317,8 @@ return array(
 
     // ─── MORNING TEA ────────────────────────────────────────────
     'morning-tea' => array(
-        'id'            => 'morningtea',
+        'id' => 'morningtea',
+        'image' => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-front.png',
         'name'          => 'Morning Tea',
         'subtitle'      => 'Deodorizing &amp; Conditioning Spray &middot; Morning Tea',
         'tagline'       => 'Quiet warmth in a quiet room.',
@@ -390,7 +395,8 @@ return array(
 
     // ─── LILY DEW ───────────────────────────────────────────────
     'lily-dew' => array(
-        'id'            => 'lilydew',
+        'id' => 'lilydew',
+        'image' => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-front.png',
         'name'          => 'Lily Dew',
         'subtitle'      => 'Deodorizing &amp; Conditioning Spray &middot; Lily Dew',
         'tagline'       => 'Petals before the sun arrives.',
@@ -467,7 +473,8 @@ return array(
 
     // ─── GRAPEFRUIT MUSE ────────────────────────────────────────
     'grapefruit-muse' => array(
-        'id'            => 'grapefrruitmuse',
+        'id' => 'grapefrruitmuse',
+        'image' => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-front.png',
         'name'          => 'Grapefruit Muse',
         'subtitle'      => 'Deodorizing &amp; Conditioning Spray &middot; Grapefruit Muse',
         'tagline'       => 'Bold, bright, unapologetically alive.',
@@ -544,7 +551,8 @@ return array(
 
     // ─── SWEET PETAL ────────────────────────────────────────────
     'sweet-petal' => array(
-        'id'            => 'sweetpetal',
+        'id' => 'sweetpetal',
+        'image' => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-front.png',
         'name'          => 'Sweet Petal',
         'subtitle'      => 'Deodorizing &amp; Conditioning Spray &middot; Sweet Petal',
         'tagline'       => 'Softness, distilled.',
@@ -621,7 +629,8 @@ return array(
 
     // ─── BERGAMOT BREEZE ────────────────────────────────────────
     'bergamot-breeze' => array(
-        'id'            => 'bergamotbreeze',
+        'id' => 'bergamotbreeze',
+        'image' => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-front.png',
         'name'          => 'Bergamot Breeze',
         'subtitle'      => 'Deodorizing &amp; Conditioning Spray &middot; Bergamot Breeze',
         'tagline'       => 'The freshest thing you\'ll smell today.',
@@ -698,7 +707,8 @@ return array(
 
     // ─── FREESIA MIST ───────────────────────────────────────────
     'freesia-mist' => array(
-        'id'            => 'freesiamist',
+        'id' => 'freesiamist',
+        'image' => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-front.png',
         'name'          => 'Freesia Mist',
         'subtitle'      => 'Deodorizing &amp; Conditioning Spray &middot; Freesia Mist',
         'tagline'       => 'A spring field, remembered.',
@@ -775,7 +785,8 @@ return array(
 
     // ─── BERRY KISS ─────────────────────────────────────────────
     'berry-kiss' => array(
-        'id'            => 'berrykiss',
+        'id' => 'berrykiss',
+        'image' => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-front.png',
         'name'          => 'Berry Kiss',
         'subtitle'      => 'Deodorizing &amp; Conditioning Spray &middot; Berry Kiss',
         'tagline'       => 'Rich, lush, unexpectedly refined.',
@@ -852,7 +863,8 @@ return array(
 
     // ─── CANDY CLOUD ────────────────────────────────────────────
     'candy-cloud' => array(
-        'id'            => 'candycloud',
+        'id' => 'candycloud',
+        'image' => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-front.png',
         'name'          => 'Candy Cloud',
         'subtitle'      => 'Deodorizing &amp; Conditioning Spray &middot; Candy Cloud',
         'tagline'       => 'Pure joy, absolutely weightless.',
@@ -929,7 +941,8 @@ return array(
 
     // ─── LAVENDER BLISS ─────────────────────────────────────────
     'lavender-bliss' => array(
-        'id'            => 'lavenderbliss',
+        'id' => 'lavenderbliss',
+        'image' => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-front.png',
         'name'          => 'Lavender Bliss',
         'subtitle'      => 'Deodorizing &amp; Conditioning Spray &middot; Lavender Bliss',
         'tagline'       => 'Stillness you can wear.',
@@ -1006,7 +1019,8 @@ return array(
 
     // ─── SUNNY DAISY ────────────────────────────────────────────
     'sunny-daisy' => array(
-        'id'            => 'sunnydaisy',
+        'id' => 'sunnydaisy',
+        'image' => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-front.png',
         'name'          => 'Sunny Daisy',
         'subtitle'      => 'Deodorizing &amp; Conditioning Spray &middot; Sunny Daisy',
         'tagline'       => 'Happiness has a scent.',
@@ -1083,7 +1097,8 @@ return array(
 
     // ─── BUBBLE GUM ─────────────────────────────────────────────
     'bubble-gum' => array(
-        'id'            => 'bubblegum',
+        'id' => 'bubblegum',
+        'image' => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-front.png',
         'name'          => 'Bubble Gum',
         'subtitle'      => 'Deodorizing &amp; Conditioning Spray &middot; Bubble Gum',
         'tagline'       => 'Blissfully, unapologetically sweet.',
@@ -1160,7 +1175,8 @@ return array(
 
     // ─── BABY POWDER ────────────────────────────────────────────
     'baby-powder' => array(
-        'id'            => 'babypowder',
+        'id' => 'babypowder',
+        'image' => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-front.png',
         'name'          => 'Baby Powder',
         'subtitle'      => 'Deodorizing &amp; Conditioning Spray &middot; Baby Powder',
         'tagline'       => 'Soft as a first breath.',
@@ -1237,7 +1253,9 @@ return array(
 
     // ─── CLEAN ESSENTIALS ───────────────────────────────────────
     'clean-essentials' => array(
-        'id'            => 'cleanessentials',
+        'id' => 'cleanessentials',
+        'image' => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-back.png',
+        'image' => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-front.png',
         'name'          => 'Clean Essentials&trade;',
         'subtitle'      => 'Daily Oral Care Spray &middot; Original Formula',
         'tagline'       => 'Fresh breath starts with clean science.',
@@ -1314,7 +1332,9 @@ return array(
 
     // ─── ENZYME DEFENSE ─────────────────────────────────────────
     'enzyme-defense' => array(
-        'id'            => 'enzymedefense',
+        'id' => 'enzymedefense',
+        'image' => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-back.png',
+        'image' => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-front.png',
         'name'          => 'Enzyme Defense&trade;',
         'subtitle'      => 'Daily Oral Care Spray &middot; Enzyme System',
         'tagline'       => 'Biofilm doesn\'t stand a chance.',
@@ -1391,7 +1411,9 @@ return array(
 
     // ─── PRO DEFENSE ────────────────────────────────────────────
     'pro-defense' => array(
-        'id'            => 'prodefense',
+        'id' => 'prodefense',
+        'image' => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-back.png',
+        'image' => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-front.png',
         'name'          => 'Pro Defense&trade;',
         'subtitle'      => 'Daily Oral Care Spray &middot; 4-Action System',
         'tagline'       => 'Four mechanisms. One spray. Zero compromise.',
@@ -1468,7 +1490,9 @@ return array(
 
     // ─── NATURE SHIELD ──────────────────────────────────────────
     'nature-shield' => array(
-        'id'            => 'natureshield',
+        'id' => 'natureshield',
+        'image' => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-back.png',
+        'image' => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-front.png',
         'name'          => 'Nature Shield&trade;',
         'subtitle'      => 'Daily Oral Care Spray &middot; All-Natural',
         'tagline'       => 'Nature-powered. Science-proven.',
@@ -1545,7 +1569,9 @@ return array(
 
     // ─── FRESH GUARD ────────────────────────────────────────────
     'fresh-guard' => array(
-        'id'            => 'freshguard',
+        'id' => 'freshguard',
+        'image' => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-back.png',
+        'image' => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-front.png',
         'name'          => 'Fresh Guard&trade;',
         'subtitle'      => 'Dog Oral Care Water Additive &middot; 16 fl oz',
         'tagline'       => 'Fresher breath. Just add to water.',
@@ -1622,7 +1648,9 @@ return array(
 
     // ─── GENTLE GUARD ───────────────────────────────────────────
     'gentle-guard' => array(
-        'id'            => 'gentleguard',
+        'id' => 'gentleguard',
+        'image' => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-back.png',
+        'image' => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-front.png',
         'name'          => 'Gentle Guard&trade;',
         'subtitle'      => 'Cat Oral Care Water Additive &middot; 16 fl oz',
         'tagline'       => 'Gentle on felines. Relentless on plaque.',

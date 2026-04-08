@@ -6,6 +6,7 @@ return array(
     // ─── ORIGINAL ────────────────────────────────────────────────
     'original' => array(
         'id'            => 'original',
+        'image'         => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-front.png',
         'name'          => 'Original&trade;',
         'subtitle'      => 'No-Chew &amp; Boundary Deterrent Spray &middot; 250 ml',
         'tagline'       => 'Firm boundaries. Gentle formula. No compromise.',
@@ -83,6 +84,7 @@ return array(
     // ─── NATURAL ─────────────────────────────────────────────────
     'natural' => array(
         'id'            => 'natural',
+        'image'         => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-front.png',
         'name'          => 'Natural&trade;',
         'subtitle'      => 'Essential Oil Blend Deterrent Spray &middot; 250 ml',
         'tagline'       => 'Nature-powered protection. Zero compromise.',
@@ -160,6 +162,7 @@ return array(
     // ─── 2-IN-1 HOT SPOT ────────────────────────────────────────
     '2-in-1' => array(
         'id'            => 'hotspot',
+        'image'         => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-front.png',
         'name'          => '2-in-1&trade; Hot Spot',
         'subtitle'      => 'Treat + Deter Dual Action Spray &middot; 250 ml',
         'tagline'       => 'Soothe and protect. One spray does both.',
@@ -237,6 +240,7 @@ return array(
     // ─── SENSITIVE ───────────────────────────────────────────────
     'sensitive' => array(
         'id'            => 'sensitive',
+        'image'         => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-pair.png',
         'name'          => 'Sensitive',
         'subtitle'      => 'Fragrance-Free Dog Shampoo &middot; 16 fl oz &middot; pH 6.2&ndash;7.0',
         'tagline'       => 'Some dogs need less, not more &mdash; and a shampoo that actually means it.',
@@ -316,6 +320,7 @@ return array(
     // ─── ITCH RELIEF ─────────────────────────────────────────────
     'itch-relief' => array(
         'id'            => 'itchrelief',
+        'image'         => '/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-pair.png',
         'name'          => 'Itch Relief',
         'subtitle'      => 'Salicylic Acid &amp; Niacinamide &middot; 16 fl oz &middot; pH 5.5&ndash;6.5',
         'tagline'       => 'The dermatologist combination your dog\'s skin has been waiting for.',

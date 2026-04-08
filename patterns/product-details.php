@@ -31,11 +31,11 @@ function bl_text($s) { echo wp_kses_post($s); }
 <!-- PRODUCT HERO -->
 <section class="bl-hero bl-hero--product">
   <div class="bl-wrap">
-    <div class="bl-breadcrumb">BOUNDLESS &middot; Products &middot; <?php bl_text($p['name']); ?></div>
+    <div class="bl-breadcrumb">RedyPet &middot; Products &middot; <?php bl_text($p['name']); ?></div>
     <div class="bl-product-hero-grid">
       <div class="bl-hero-content">
         <div class="bl-hero-badge"><div class="bl-badge-dot"></div><span><?php bl_text($p['badge']); ?></span></div>
-        <div class="bl-hero-brand">BOUNDLESS</div>
+        <div class="bl-hero-brand">RedyPet</div>
         <h1 class="bl-hero-title"><?php bl_text($p['name']); ?></h1>
         <div class="bl-hero-subtitle"><?php bl_text($p['subtitle']); ?></div>
         <p class="bl-hero-tagline"><?php bl_text($p['tagline']); ?></p>
@@ -62,7 +62,7 @@ function bl_text($s) { echo wp_kses_post($s); }
         <div class="bl-bottle-outer">
           <div class="bl-bottle">
             <div class="bl-spray-head"></div><div class="bl-spray-nozzle"></div><div class="bl-spray-trigger"></div>
-            <div class="bl-bottle-brand">BOUNDLESS</div>
+            <div class="bl-bottle-brand">RedyPet</div>
             <div class="bl-bottle-name"><?php bl_text($p['name']); ?></div>
             <div class="bl-bottle-line"></div>
             <div class="bl-bottle-type"><?php bl_text($p['type']); ?></div>
