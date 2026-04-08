@@ -86,6 +86,7 @@ $cat = $bl_categories[$bl_cat_slug];
 /* ── TOP CATEGORY PAGE ── */
 .bl-topcat-hero {
   padding: clamp(36px,6vw,56px) 0 clamp(24px,4vw,36px);
+  background: linear-gradient(135deg, #FAF8F3 0%, #F4FAF6 45%, #E8F5ED 100%);
   border-bottom: 1px solid rgba(46,125,79,0.12);
 }
 .bl-topcat-breadcrumb {

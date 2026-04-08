@@ -933,7 +933,7 @@ footer {
 .bl-section--flush { padding-top: 0 !important; }
 
 /* Showcase product card colour variants */
-.bl-showcase-visual--original { background: linear-gradient(135deg, #0A2E18, #1A5C38); }
+.bl-showcase-visual--original { background: linear-gradient(135deg, #1A5C38, #1A5C38); }
 .bl-showcase-visual--natural  { background: linear-gradient(135deg, #1B4D2E, #2D6A2D); }
 .bl-showcase-visual--hotspot  { background: linear-gradient(135deg, #0D4A52, #1A7A8A); }
 .bl-showcase-visual--sensitive  { background: linear-gradient(135deg, #1E3320, #4A6741); }
@@ -945,7 +945,7 @@ footer {
 .bl-showcase-badge--itchrelief { background: rgba(44,95,106,0.15); color: #2C5F6A; }
 
 /* Subcategory feature card colour variants */
-.bl-subcat-visual--original { background: linear-gradient(135deg, #0A2E18, #1A5C38); }
+.bl-subcat-visual--original { background: linear-gradient(135deg, #1A5C38, #1A5C38); }
 .bl-subcat-visual--natural  { background: linear-gradient(135deg, #1B4D2E, #2D6A2D); }
 .bl-subcat-visual--hotspot  { background: linear-gradient(135deg, #0D4A52, #1A7A8A); }
 .bl-subcat-visual--sensitive  { background: linear-gradient(135deg, #1E3320, #4A6741); }
@@ -1333,11 +1333,12 @@ footer {
    ARCHIVE / BLOG LIST TEMPLATE
    ================================================================ */
 .bl-archive-header {
-	background: linear-gradient(135deg, #1A5C38 0%, #2E7D4F 100%);
-	color: #fff; padding: clamp(36px, 6vw, 56px) 0;
+	background: linear-gradient(135deg, #FAF8F3 0%, #F4FAF6 45%, #E8F5ED 100%);
+	color: var(--bl-text); padding: clamp(36px, 6vw, 56px) 0;
+	border-bottom: 1px solid rgba(46,125,79,0.12);
 }
-.bl-archive-title { font-family: "Cormorant Garamond", serif !important; font-size: clamp(2rem, 4vw, 2.75rem) !important; font-style: italic !important; color: #fff !important; margin-bottom: 8px !important; }
-.bl-archive-desc { font-size: 15px !important; opacity: 0.72; max-width: 540px; line-height: 1.65; }
+.bl-archive-title { font-family: "Cormorant Garamond", serif !important; font-size: clamp(1.5rem, 3vw, 2rem) !important; font-weight: 700 !important; color: var(--bl-green) !important; margin-bottom: 8px !important; }
+.bl-archive-desc { font-size: 15px !important; color: #555; max-width: 540px; line-height: 1.65; }
 .bl-archive-grid-wrap {
 	padding: clamp(36px, 6vw, 56px) max(var(--bl-gutter), env(safe-area-inset-left, 0px)) clamp(48px, 8vw, 72px);
 }
@@ -1602,7 +1603,7 @@ footer {
 }
 .bl-404-btn-primary {
 	background: var(--bl-gold);
-	color: #0F3D24;
+	color: #1A5C38;
 	font-weight: 700;
 	font-size: 14px;
 	letter-spacing: 0.08em;
@@ -2650,7 +2651,7 @@ footer {
 /* ── HERO ────────────────────────────────────────────────────────────────── */
 .bl-collection-hero {
   position: relative;
-  padding: 80px 40px 60px;
+  padding: clamp(40px, 8vw, 60px) max(var(--bl-gutter), 24px) clamp(30px, 5vw, 50px);
   text-align: center;
   border-bottom: 1px solid var(--bl-line);
   overflow: hidden;
