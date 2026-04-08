@@ -155,7 +155,7 @@ $dental_products = array(
 <!-- PRODUCT GRID -->
 <div class="bl-collection-grid bl-dental-grid">
   <?php foreach ( $dental_products as $d ) : ?>
-  <a href="/dental/" class="bl-product-card" style="--band-gradient:<?php echo $d['gradient']; ?>;text-decoration:none;color:inherit;">
+  <a href="/<?php echo esc_attr( sanitize_title( $d['name'] ) ); ?>/" class="bl-product-card" style="--band-gradient:<?php echo $d['gradient']; ?>;text-decoration:none;color:inherit;">
 
     <!-- Band -->
     <div class="bl-product-card-band">

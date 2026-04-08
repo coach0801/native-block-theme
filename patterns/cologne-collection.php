@@ -272,7 +272,7 @@ $colognes = array(
 <!-- PRODUCT GRID -->
 <div class="bl-collection-grid">
   <?php foreach ( $colognes as $c ) : ?>
-  <a href="<?php echo esc_attr( $c['slug'] ); ?>" class="bl-product-card" style="--band-gradient:<?php echo esc_attr( $c['gradient'] ); ?>;text-decoration:none;color:inherit;">
+  <a href="/<?php echo esc_attr( sanitize_title( $c['name'] ) ); ?>/" class="bl-product-card" style="--band-gradient:<?php echo esc_attr( $c['gradient'] ); ?>;text-decoration:none;color:inherit;">
     <div class="bl-product-card-band">
       <span class="bl-product-card-sku"><?php echo esc_html( $c['sku'] ); ?></span>
       <span class="bl-product-card-dog">&#128054;</span>

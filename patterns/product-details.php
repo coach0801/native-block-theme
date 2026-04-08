@@ -6,8 +6,12 @@
  * Description: Product details page. Dynamically shows correct product based on page slug.
  */
 
-/* ── Load product data ── */
+/* ── Load product data (core + collection products) ── */
 $bl_products = include get_template_directory() . '/inc/product-data.php';
+$bl_collection = include get_template_directory() . '/inc/collection-product-data.php';
+if (is_array($bl_collection)) {
+	$bl_products = array_merge($bl_products, $bl_collection);
+}
 
 /* Detect which product to show from the current page slug */
 $bl_slug = '';
@@ -48,11 +52,13 @@ function bl_text($s) { echo wp_kses_post($s); }
           <?php foreach ($p['trust'] as $t) : ?><span>&#10003; <?php bl_text($t); ?></span><?php endforeach; ?>
         </div>
       </div>
-      <div class="bl-product-tabs-col">
-        <a href="#bl-section-description" class="bl-product-tab-link active">Product Description</a>
-        <a href="#bl-section-posters" class="bl-product-tab-link">Product Posters</a>
-      </div>
       <div class="bl-bottle-wrap">
+        <?php if (! empty($p['image'])) : ?>
+        <div class="bl-product-image">
+          <img src="<?php echo esc_url($p['image']); ?>" alt="<?php echo esc_attr($p['name']); ?>" />
+          <div class="bl-bottle-badge"><?php bl_text($p['bottle_badge']); ?></div>
+        </div>
+        <?php else : ?>
         <div class="bl-bottle-outer">
           <div class="bl-bottle">
             <div class="bl-spray-head"></div><div class="bl-spray-nozzle"></div><div class="bl-spray-trigger"></div>
@@ -69,6 +75,7 @@ function bl_text($s) { echo wp_kses_post($s); }
           </div>
           <div class="bl-bottle-badge"><?php bl_text($p['bottle_badge']); ?></div>
         </div>
+        <?php endif; ?>
       </div>
     </div>
   </div>

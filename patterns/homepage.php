@@ -11,63 +11,59 @@
 <!-- SLIDING PRODUCT SHOWCASE — interactive carousel requires custom JS -->
 <section class="bl-showcase-slider">
   <div class="bl-wrap">
-    <div class="bl-showcase-header">
-      <div class="bl-eyebrow">Our Products</div>
-      <h2 class="bl-section-title">The BOUNDLESS Range</h2>
-    </div>
     <div class="bl-showcase-track-wrap">
       <button class="bl-showcase-arrow bl-showcase-prev" aria-label="Previous product" onclick="blSliderPrev()">&#8249;</button>
       <div class="bl-showcase-track" id="bl-showcase-track">
-        <div class="bl-showcase-card bl-showcase-active">
+        <a href="/original" class="bl-showcase-card bl-showcase-active">
           <div class="bl-showcase-visual bl-showcase-visual--original"><div class="bl-showcase-bottle-icon">&#127807;</div></div>
           <div class="bl-showcase-info">
             <span class="bl-showcase-badge">BESTSELLER</span>
             <h3 class="bl-showcase-name">Original&#8482;</h3>
             <p class="bl-showcase-desc">No-Chew &amp; Boundary Deterrent Spray. Alcohol-free. Triple scent barrier.</p>
             <div class="bl-showcase-price">&pound;12.99 <span>250 ml</span></div>
-            <a href="/original" class="bl-showcase-btn">View Product &rarr;</a>
+            <span class="bl-showcase-btn">View Product &rarr;</span>
           </div>
-        </div>
-        <div class="bl-showcase-card">
+        </a>
+        <a href="/natural" class="bl-showcase-card">
           <div class="bl-showcase-visual bl-showcase-visual--natural"><div class="bl-showcase-bottle-icon">&#127811;</div></div>
           <div class="bl-showcase-info">
             <span class="bl-showcase-badge bl-showcase-badge--natural">NATURAL</span>
             <h3 class="bl-showcase-name">Natural&#8482;</h3>
             <p class="bl-showcase-desc">Essential Oil Blend Formula. Plant-powered deterrent for sensitive environments.</p>
             <div class="bl-showcase-price">&pound;14.99 <span>250 ml</span></div>
-            <a href="/natural" class="bl-showcase-btn">View Product &rarr;</a>
+            <span class="bl-showcase-btn">View Product &rarr;</span>
           </div>
-        </div>
-        <div class="bl-showcase-card">
+        </a>
+        <a href="/2-in-1" class="bl-showcase-card">
           <div class="bl-showcase-visual bl-showcase-visual--hotspot"><div class="bl-showcase-bottle-icon">&#128167;</div></div>
           <div class="bl-showcase-info">
             <span class="bl-showcase-badge bl-showcase-badge--hotspot">2-IN-1</span>
             <h3 class="bl-showcase-name">2-in-1&#8482; Hot Spot</h3>
             <p class="bl-showcase-desc">Treat + Deter Dual Action. Soothes hot spots while setting boundaries.</p>
             <div class="bl-showcase-price">&pound;16.99 <span>250 ml</span></div>
-            <a href="/2-in-1" class="bl-showcase-btn">View Product &rarr;</a>
+            <span class="bl-showcase-btn">View Product &rarr;</span>
           </div>
-        </div>
-        <div class="bl-showcase-card">
+        </a>
+        <a href="/sensitive" class="bl-showcase-card">
           <div class="bl-showcase-visual bl-showcase-visual--sensitive"><div class="bl-showcase-bottle-icon">&#127806;</div></div>
           <div class="bl-showcase-info">
             <span class="bl-showcase-badge bl-showcase-badge--sensitive">SENSITIVE</span>
             <h3 class="bl-showcase-name">Sensitive</h3>
             <p class="bl-showcase-desc">Fragrance-Free Dog Shampoo. Colloidal oatmeal &amp; Sodium PCA. Sulfate-free.</p>
             <div class="bl-showcase-price">$18.99 <span>16 fl oz</span></div>
-            <a href="/sensitive" class="bl-showcase-btn">View Product &rarr;</a>
+            <span class="bl-showcase-btn">View Product &rarr;</span>
           </div>
-        </div>
-        <div class="bl-showcase-card">
+        </a>
+        <a href="/itch-relief" class="bl-showcase-card">
           <div class="bl-showcase-visual bl-showcase-visual--itchrelief"><div class="bl-showcase-bottle-icon">&#129526;</div></div>
           <div class="bl-showcase-info">
             <span class="bl-showcase-badge bl-showcase-badge--itchrelief">ITCH RELIEF</span>
             <h3 class="bl-showcase-name">Itch Relief</h3>
             <p class="bl-showcase-desc">Salicylic Acid &amp; Niacinamide. Vet-grade actives. Tea tree-free.</p>
             <div class="bl-showcase-price">$23.99 <span>16 fl oz</span></div>
-            <a href="/itch-relief" class="bl-showcase-btn">View Product &rarr;</a>
+            <span class="bl-showcase-btn">View Product &rarr;</span>
           </div>
-        </div>
+        </a>
       </div>
       <button class="bl-showcase-arrow bl-showcase-next" aria-label="Next product" onclick="blSliderNext()">&#8250;</button>
     </div>
@@ -101,75 +97,61 @@
   </div>
 </div>
 
-<!-- HERO — custom interactive section (bottle visual, qty controls, cart button) -->
-<section class="bl-hero">
+<!-- ITEM FROM EACH CATEGORY — one featured product per category with picture -->
+<section class="bl-home-categories">
   <div class="bl-wrap">
-    <div class="bl-breadcrumb">BOUNDLESS &middot; Dog Deterrent Spray &middot; Alcohol-Free Formulation</div>
-    <div class="bl-hero-grid">
-      <div class="bl-hero-content">
-        <div class="bl-hero-badge"><div class="bl-badge-dot"></div><span>Alcohol-Free &middot; Skin-Safe Formula</span></div>
-        <div class="bl-hero-brand">BOUNDLESS</div>
-        <h1 class="bl-hero-title">Original&#8482;</h1>
-        <div class="bl-hero-subtitle">No-Chew &amp; Boundary Deterrent Spray &middot; 250 ml</div>
-        <p class="bl-hero-tagline">Firm boundaries. Gentle formula. No compromise.</p>
-        <div class="bl-stars-row">
-          <span class="bl-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-          <span class="bl-review-count">4.8 &middot; 92 reviews</span>
+    <div class="bl-home-cat-grid">
+      <a href="/sensitive/" class="bl-home-cat-card">
+        <div class="bl-home-cat-visual bl-showcase-visual--sensitive">
+          <span class="bl-home-cat-icon">&#127806;</span>
         </div>
-        <p class="bl-hero-desc">The alcohol-free dog deterrent spray that protects your home without worrying about your dog. Denatonium benzoate &mdash; the world&rsquo;s most bitter compound &mdash; pairs with a triple essential oil scent barrier and skin-safe actives. One spray. Lasting results.</p>
-        <div class="bl-purchase-row">
-          <div class="bl-price-block"><span class="bl-price">&pound;12.99</span><span class="bl-price-size">250 ml</span></div>
-          <div class="bl-buy-controls">
-            <div class="bl-qty-control">
-              <button class="bl-qty-btn" aria-label="Decrease quantity" onclick="blChangeQty(-1)">&minus;</button>
-              <span class="bl-qty-val" id="bl-qty-display">1</span>
-              <button class="bl-qty-btn" aria-label="Increase quantity" onclick="blChangeQty(1)">+</button>
-            </div>
-            <button class="bl-add-btn" id="bl-add-btn" data-product="original" onclick="blAddToCart()">Add to Cart</button>
-          </div>
+        <div class="bl-home-cat-info">
+          <div class="bl-home-cat-label">Grooming</div>
+          <h3 class="bl-home-cat-name">Sensitive</h3>
+          <p class="bl-home-cat-desc">Fragrance-Free Dog Shampoo</p>
+          <div class="bl-home-cat-price">$18.99</div>
+          <span class="bl-home-cat-link">View Product &rarr;</span>
         </div>
-        <div class="bl-trust-row">
-          <span>&#10003; Free shipping &pound;35+</span>
-          <span>&#10003; 30-day guarantee</span>
-          <span>&#10003; Alcohol-Free</span>
-          <span>&#10003; Skin-Safe Formula</span>
+      </a>
+      <a href="/citrus-whisper/" class="bl-home-cat-card">
+        <div class="bl-home-cat-visual" style="background:linear-gradient(135deg,#F9E04B,#F4A92E);">
+          <img src="/wp-content/themes/boundless-native-theme/assets/img/products/cologne-bottle-front.png" alt="Cologne Spray" class="bl-home-cat-img" />
         </div>
-      </div>
-      <div class="bl-bottle-wrap">
-        <div class="bl-bottle-outer">
-          <div class="bl-bottle">
-            <div class="bl-spray-head"></div>
-            <div class="bl-spray-nozzle"></div>
-            <div class="bl-spray-trigger"></div>
-            <div class="bl-bottle-brand">BOUNDLESS</div>
-            <div class="bl-bottle-name">Original&#8482;</div>
-            <div class="bl-bottle-line"></div>
-            <div class="bl-bottle-type">No-Chew Deterrent Spray</div>
-            <div class="bl-bottle-ings">
-              <div class="bl-bottle-ing"><span>Denatonium Benzoate</span><span>0.015%</span></div>
-              <div class="bl-bottle-ing"><span>Citronella Oil</span><span>0.30%</span></div>
-              <div class="bl-bottle-ing"><span>Peppermint Oil</span><span>0.30%</span></div>
-              <div class="bl-bottle-ing"><span>Allantoin</span><span>0.20%</span></div>
-            </div>
-            <div class="bl-bottle-size">250 ml &middot; pH 5.5&ndash;6.0</div>
-          </div>
-          <div class="bl-bottle-badge">SKIN SAFE</div>
+        <div class="bl-home-cat-info">
+          <div class="bl-home-cat-label">Cologne</div>
+          <h3 class="bl-home-cat-name">Citrus Whisper</h3>
+          <p class="bl-home-cat-desc">Deodorizing &amp; Conditioning Spray</p>
+          <div class="bl-home-cat-price">$24.00</div>
+          <span class="bl-home-cat-link">View Product &rarr;</span>
         </div>
-      </div>
+      </a>
+      <a href="/original/" class="bl-home-cat-card">
+        <div class="bl-home-cat-visual bl-showcase-visual--original">
+          <span class="bl-home-cat-icon">&#128021;</span>
+        </div>
+        <div class="bl-home-cat-info">
+          <div class="bl-home-cat-label">Behavior</div>
+          <h3 class="bl-home-cat-name">Original&#8482;</h3>
+          <p class="bl-home-cat-desc">No-Chew Deterrent Spray</p>
+          <div class="bl-home-cat-price">&pound;12.99</div>
+          <span class="bl-home-cat-link">View Product &rarr;</span>
+        </div>
+      </a>
+      <a href="/clean-essentials/" class="bl-home-cat-card">
+        <div class="bl-home-cat-visual" style="background:linear-gradient(135deg,#E8F5ED,#B5D8C0);">
+          <span class="bl-home-cat-icon">&#129463;</span>
+        </div>
+        <div class="bl-home-cat-info">
+          <div class="bl-home-cat-label">Dental</div>
+          <h3 class="bl-home-cat-name">Clean Essentials&#8482;</h3>
+          <p class="bl-home-cat-desc">Daily Oral Care Spray</p>
+          <div class="bl-home-cat-price">$12.99</div>
+          <span class="bl-home-cat-link">View Product &rarr;</span>
+        </div>
+      </a>
     </div>
   </div>
 </section>
-
-<!-- STATS BAR -->
-<div class="bl-stats-bar">
-  <div class="bl-wrap bl-stats-inner">
-    <div class="bl-stat"><div class="bl-stat-val">0.015%</div><div class="bl-stat-label">Denatonium Benzoate</div></div>
-    <div class="bl-stat"><div class="bl-stat-val">pH 5.5&ndash;6.0</div><div class="bl-stat-label">Skin Balanced</div></div>
-    <div class="bl-stat"><div class="bl-stat-val">0%</div><div class="bl-stat-label">Alcohol</div></div>
-    <div class="bl-stat"><div class="bl-stat-val">Triple</div><div class="bl-stat-label">Scent Barrier</div></div>
-    <div class="bl-stat"><div class="bl-stat-val">&#9733; 4.8</div><div class="bl-stat-label">92 Reviews</div></div>
-  </div>
-</div>
 <!-- /wp:html -->
 
 <!-- BENEFITS — native WordPress blocks for visual editing -->

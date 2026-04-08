@@ -1079,6 +1079,10 @@ footer {
 	font-size: 11px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase;
 	color: rgba(255,255,255,0.82); flex-shrink: 0;
 }
+@media (max-width: 480px) {
+	.bl-usp-track { gap: 1.5rem; }
+	.bl-usp-item { font-size: 10px; gap: 6px; }
+}
 .bl-usp-dot { width: 5px; height: 5px; background: #A8FFB8; border-radius: 50%; flex-shrink: 0; }
 
 /* ================================================================
@@ -1664,21 +1668,32 @@ footer {
 	overflow: hidden;
 	border: 1px solid var(--bl-green-border);
 	transition: transform 0.3s, box-shadow 0.3s;
+	text-decoration: none;
+	color: inherit;
+	display: flex;
+	flex-direction: column;
 }
 .bl-showcase-card:hover {
 	transform: translateY(-6px);
 	box-shadow: 0 16px 48px rgba(15,61,36,0.12);
 }
 .bl-showcase-visual {
-	height: 200px;
+	height: 260px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	position: relative;
 }
 .bl-showcase-bottle-icon {
-	font-size: 4rem;
+	font-size: 6rem;
 	filter: drop-shadow(0 8px 24px rgba(0,0,0,0.2));
+}
+/* Support real product images in slider cards */
+.bl-showcase-visual img {
+	max-width: 80%;
+	max-height: 220px;
+	object-fit: contain;
+	filter: drop-shadow(0 8px 24px rgba(0,0,0,0.15));
 }
 .bl-showcase-info {
 	padding: clamp(18px, 3vw, 28px) clamp(16px, 2.5vw, 24px);
@@ -1780,6 +1795,8 @@ footer {
 	.bl-showcase-card { flex: 0 0 100%; }
 	.bl-showcase-track-wrap { padding: 0; }
 	.bl-showcase-arrow { display: none; }
+	.bl-showcase-visual { height: 180px; }
+	.bl-showcase-bottle-icon { font-size: 4rem; }
 }
 
 /* ================================================================
@@ -2210,7 +2227,7 @@ footer {
 	.bl-related-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 599px) {
-	.bl-related-grid { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; }
+	.bl-related-grid { grid-template-columns: 1fr; }
 }
 
 /* ================================================================
@@ -2677,9 +2694,9 @@ footer {
 
 .bl-collection-hero h1 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(40px, 6vw, 80px);
+  font-size: clamp(28px, 4vw, 44px);
   font-weight: 300;
-  line-height: 1.05;
+  line-height: 1.1;
   letter-spacing: -0.02em;
   margin-bottom: 16px;
   color: var(--bl-ink);
@@ -3003,4 +3020,111 @@ footer {
 
 .bl-product-card-rating-star {
   color: #F5A623;
+}
+
+/* Product image (replaces CSS bottle when image is provided) */
+.bl-product-image {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.bl-product-image img {
+  max-width: 280px;
+  max-height: 400px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
+}
+.bl-product-image .bl-bottle-badge {
+  position: absolute;
+  top: 20px;
+  right: 0;
+}
+
+/* Homepage — Shop by Category grid */
+.bl-home-categories {
+  padding: clamp(40px,8vw,72px) 0;
+}
+.bl-home-cat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.bl-home-cat-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--bl-green-border);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.bl-home-cat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.08);
+}
+.bl-home-cat-visual {
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.bl-home-cat-icon {
+  font-size: 5rem;
+  filter: drop-shadow(0 6px 16px rgba(0,0,0,0.15));
+}
+.bl-home-cat-img {
+  max-width: 70%;
+  max-height: 190px;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 20px rgba(0,0,0,0.18));
+}
+.bl-home-cat-info {
+  padding: 20px;
+}
+.bl-home-cat-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bl-gold);
+  margin-bottom: 4px;
+}
+.bl-home-cat-name {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--bl-green);
+  margin-bottom: 4px;
+}
+.bl-home-cat-desc {
+  font-size: 12px;
+  color: #6B7280;
+  margin-bottom: 8px;
+}
+.bl-home-cat-price {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--bl-green);
+  margin-bottom: 10px;
+}
+.bl-home-cat-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--bl-green-mid);
+}
+@media (max-width: 900px) {
+  .bl-home-cat-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .bl-home-cat-grid { grid-template-columns: 1fr; }
+  .bl-home-cat-visual { height: 160px; }
+  .bl-home-cat-icon { font-size: 3.5rem; }
+  .bl-home-cat-img { max-height: 140px; }
 }

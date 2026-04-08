@@ -348,6 +348,30 @@ function boundless_create_pages_on_activation() {
 		/* Dental subcategory pages */
 		array('title' => 'Breath Spray',                 'slug' => 'breath-spray',           'template' => 'page-dental-collection'),
 		array('title' => 'Water Additive',               'slug' => 'water-additive',         'template' => 'page-subcategory'),
+		/* Cologne individual product pages */
+		array('title' => 'Citrus Whisper',    'slug' => 'citrus-whisper',    'template' => 'page-product'),
+		array('title' => 'Peach Glow',        'slug' => 'peach-glow',        'template' => 'page-product'),
+		array('title' => 'Rose Mirage',       'slug' => 'rose-mirage',       'template' => 'page-product'),
+		array('title' => 'Lime Veil',         'slug' => 'lime-veil',         'template' => 'page-product'),
+		array('title' => 'Morning Tea',       'slug' => 'morning-tea',       'template' => 'page-product'),
+		array('title' => 'Lily Dew',          'slug' => 'lily-dew',          'template' => 'page-product'),
+		array('title' => 'Grapefruit Muse',   'slug' => 'grapefruit-muse',   'template' => 'page-product'),
+		array('title' => 'Sweet Petal',       'slug' => 'sweet-petal',       'template' => 'page-product'),
+		array('title' => 'Bergamot Breeze',   'slug' => 'bergamot-breeze',   'template' => 'page-product'),
+		array('title' => 'Freesia Mist',      'slug' => 'freesia-mist',      'template' => 'page-product'),
+		array('title' => 'Berry Kiss',        'slug' => 'berry-kiss',        'template' => 'page-product'),
+		array('title' => 'Candy Cloud',       'slug' => 'candy-cloud',       'template' => 'page-product'),
+		array('title' => 'Lavender Bliss',    'slug' => 'lavender-bliss',    'template' => 'page-product'),
+		array('title' => 'Sunny Daisy',       'slug' => 'sunny-daisy',       'template' => 'page-product'),
+		array('title' => 'Bubble Gum',        'slug' => 'bubble-gum',        'template' => 'page-product'),
+		array('title' => 'Baby Powder',       'slug' => 'baby-powder',       'template' => 'page-product'),
+		/* Dental individual product pages */
+		array('title' => 'Clean Essentials',  'slug' => 'clean-essentials',  'template' => 'page-product'),
+		array('title' => 'Enzyme Defense',    'slug' => 'enzyme-defense',    'template' => 'page-product'),
+		array('title' => 'Pro Defense',       'slug' => 'pro-defense',       'template' => 'page-product'),
+		array('title' => 'Nature Shield',     'slug' => 'nature-shield',     'template' => 'page-product'),
+		array('title' => 'Fresh Guard',       'slug' => 'fresh-guard',       'template' => 'page-product'),
+		array('title' => 'Gentle Guard',      'slug' => 'gentle-guard',      'template' => 'page-product'),
 		/* Other pages */
 		array('title' => 'Affiliate',                    'slug' => 'affiliate',              'template' => ''),
 	);

@@ -162,11 +162,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	/* Product catalogue (extend as new products are added) */
 	var blProducts = {
-		original:   { name: "BOUNDLESS Original\u2122",  size: "250 ml",   price: 12.99, currency: "\u00A3", type: "No-Chew Deterrent Spray",       tags: ["Alcohol-Free","Skin-Safe"] },
-		natural:    { name: "BOUNDLESS Natural\u2122",   size: "250 ml",   price: 14.99, currency: "\u00A3", type: "Essential Oil Deterrent Spray",  tags: ["Plant-Based","Eco-Friendly"] },
-		hotspot:    { name: "BOUNDLESS 2-in-1\u2122",    size: "250 ml",   price: 16.99, currency: "\u00A3", type: "Hot Spot Treatment + Deterrent", tags: ["Dual-Action","Soothing"] },
-		sensitive:  { name: "Sensitive",                  size: "16 fl oz", price: 18.99, currency: "$",      type: "Sensitive Dog Shampoo",          tags: ["Fragrance-Free","Sulfate-Free"] },
-		itchrelief: { name: "Itch Relief",                size: "16 fl oz", price: 23.99, currency: "$",      type: "Itch Relief Dog Shampoo",        tags: ["Vet-Grade","Tea Tree-Free"] }
+		original:       { name: "BOUNDLESS Original\u2122",  size: "250 ml",   price: 12.99, currency: "\u00A3", type: "No-Chew Deterrent Spray",       tags: ["Alcohol-Free","Skin-Safe"] },
+		natural:        { name: "BOUNDLESS Natural\u2122",   size: "250 ml",   price: 14.99, currency: "\u00A3", type: "Essential Oil Deterrent Spray",  tags: ["Plant-Based","Eco-Friendly"] },
+		hotspot:        { name: "BOUNDLESS 2-in-1\u2122",    size: "250 ml",   price: 16.99, currency: "\u00A3", type: "Hot Spot Treatment + Deterrent", tags: ["Dual-Action","Soothing"] },
+		sensitive:      { name: "Sensitive",                  size: "16 fl oz", price: 18.99, currency: "$",      type: "Sensitive Dog Shampoo",          tags: ["Fragrance-Free","Sulfate-Free"] },
+		itchrelief:     { name: "Itch Relief",                size: "16 fl oz", price: 23.99, currency: "$",      type: "Itch Relief Dog Shampoo",        tags: ["Vet-Grade","Tea Tree-Free"] },
+		citruswhisper:  { name: "Citrus Whisper",    size: "250 ml", price: 24.00, currency: "$", type: "Deodorizing Spray", tags: ["IFRA","Leave-On"] },
+		peachglow:      { name: "Peach Glow",        size: "250 ml", price: 24.00, currency: "$", type: "Deodorizing Spray", tags: ["IFRA","Leave-On"] },
+		rosemirage:     { name: "Rose Mirage",       size: "250 ml", price: 24.00, currency: "$", type: "Deodorizing Spray", tags: ["IFRA","Leave-On"] },
+		limeveil:       { name: "Lime Veil",         size: "250 ml", price: 24.00, currency: "$", type: "Deodorizing Spray", tags: ["IFRA","Leave-On"] },
+		morningtea:     { name: "Morning Tea",       size: "250 ml", price: 24.00, currency: "$", type: "Deodorizing Spray", tags: ["IFRA","Leave-On"] },
+		lilydew:        { name: "Lily Dew",          size: "250 ml", price: 24.00, currency: "$", type: "Deodorizing Spray", tags: ["IFRA","Leave-On"] },
+		grapefrruitmuse:{ name: "Grapefruit Muse",   size: "250 ml", price: 24.00, currency: "$", type: "Deodorizing Spray", tags: ["IFRA","Leave-On"] },
+		sweetpetal:     { name: "Sweet Petal",       size: "250 ml", price: 24.00, currency: "$", type: "Deodorizing Spray", tags: ["IFRA","Leave-On"] },
+		bergamotbreeze: { name: "Bergamot Breeze",   size: "250 ml", price: 24.00, currency: "$", type: "Deodorizing Spray", tags: ["IFRA","Leave-On"] },
+		freesiamist:    { name: "Freesia Mist",      size: "250 ml", price: 24.00, currency: "$", type: "Deodorizing Spray", tags: ["IFRA","Leave-On"] },
+		berrykiss:      { name: "Berry Kiss",        size: "250 ml", price: 24.00, currency: "$", type: "Deodorizing Spray", tags: ["IFRA","Leave-On"] },
+		candycloud:     { name: "Candy Cloud",       size: "250 ml", price: 24.00, currency: "$", type: "Deodorizing Spray", tags: ["IFRA","Leave-On"] },
+		lavenderbliss:  { name: "Lavender Bliss",    size: "250 ml", price: 24.00, currency: "$", type: "Deodorizing Spray", tags: ["IFRA","Leave-On"] },
+		sunnydaisy:     { name: "Sunny Daisy",       size: "250 ml", price: 24.00, currency: "$", type: "Deodorizing Spray", tags: ["IFRA","Leave-On"] },
+		bubblegum:      { name: "Bubble Gum",        size: "250 ml", price: 24.00, currency: "$", type: "Deodorizing Spray", tags: ["IFRA","Leave-On"] },
+		babypowder:     { name: "Baby Powder",       size: "250 ml", price: 24.00, currency: "$", type: "Deodorizing Spray", tags: ["IFRA","Leave-On"] },
+		cleanessentials:{ name: "Clean Essentials\u2122", size: "60 mL", price: 12.99, currency: "$", type: "Oral Care Spray", tags: ["No Xylitol","Vet-Friendly"] },
+		enzymedefense:  { name: "Enzyme Defense\u2122",   size: "60 mL", price: 16.99, currency: "$", type: "Oral Care Spray", tags: ["Enzyme","Vet-Friendly"] },
+		prodefense:     { name: "Pro Defense\u2122",      size: "60 mL", price: 15.99, currency: "$", type: "Oral Care Spray", tags: ["4-Action","Vet-Friendly"] },
+		natureshield:   { name: "Nature Shield\u2122",    size: "60 mL", price: 17.99, currency: "$", type: "Oral Care Spray", tags: ["All-Natural","Vet-Friendly"] },
+		freshguard:     { name: "Fresh Guard\u2122",      size: "473 mL", price: 24.99, currency: "$", type: "Water Additive", tags: ["For Dogs","Daily Use"] },
+		gentleguard:    { name: "Gentle Guard\u2122",     size: "473 mL", price: 24.99, currency: "$", type: "Water Additive", tags: ["For Cats","Daily Use"] }
 	};
 
 	function blGetCart() {

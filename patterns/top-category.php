@@ -82,8 +82,6 @@ $cat = $bl_categories[$bl_cat_slug];
 </section>
 <!-- /wp:html -->
 
-<!-- wp:pattern {"slug":"boundless-native-theme/related-products"} /-->
-
 <style>
 /* ── TOP CATEGORY PAGE ── */
 .bl-topcat-hero {
@@ -96,8 +94,8 @@ $cat = $bl_categories[$bl_cat_slug];
 }
 .bl-topcat-title {
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(2rem,5vw,3rem); font-weight: 700;
-  font-style: italic; color: #1A5C38;
+  font-size: clamp(1.5rem,3vw,2rem); font-weight: 700;
+  font-style: normal; color: #1A5C38;
   margin-bottom: 10px;
 }
 .bl-topcat-desc {
